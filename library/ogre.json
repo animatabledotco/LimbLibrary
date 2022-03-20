@@ -1,0 +1,902 @@
+{
+  "shapes": {
+    "matchName": "ADBE Root Vectors Group",
+    "type": "INDEXED_GROUP",
+    "properties": [
+      {
+        "matchName": "ADBE Vector Group",
+        "name": "Limb",
+        "type": "NAMED_GROUP",
+        "properties": [
+          {
+            "matchName": "ADBE Vectors Group",
+            "name": "Contents",
+            "type": "INDEXED_GROUP",
+            "properties": [
+              {
+                "matchName": "ADBE Vector Group",
+                "name": "Upper Group",
+                "type": "NAMED_GROUP",
+                "properties": [
+                  {
+                    "matchName": "ADBE Vectors Group",
+                    "name": "Contents",
+                    "type": "INDEXED_GROUP",
+                    "properties": [
+                      {
+                        "matchName": "ADBE Vector Group",
+                        "name": "Rigged Upper",
+                        "type": "NAMED_GROUP",
+                        "properties": [
+                          {
+                            "matchName": "ADBE Vectors Group",
+                            "name": "Contents",
+                            "type": "INDEXED_GROUP",
+                            "properties": [
+                              {
+                                "matchName": "ADBE Vector Group",
+                                "name": "wrinklor Group",
+                                "type": "NAMED_GROUP",
+                                "properties": [
+                                  {
+                                    "matchName": "ADBE Vectors Group",
+                                    "name": "Contents",
+                                    "type": "INDEXED_GROUP",
+                                    "properties": [
+                                      {
+                                        "matchName": "ADBE Vector Group",
+                                        "name": "Shape 1",
+                                        "type": "NAMED_GROUP",
+                                        "properties": [
+                                          {
+                                            "matchName": "ADBE Vectors Group",
+                                            "name": "Contents",
+                                            "type": "INDEXED_GROUP",
+                                            "properties": [
+                                              {
+                                                "matchName": "ADBE Vector Shape - Group",
+                                                "name": "Path 1",
+                                                "type": "NAMED_GROUP",
+                                                "properties": [
+                                                  {
+                                                    "matchName": "ADBE Vector Shape",
+                                                    "name": "Path",
+                                                    "type": "PROPERTY",
+                                                    "enabled": true,
+                                                    "expression": "",
+                                                    "value": "{\"closed\":true,\"featherInterps\":[\n\n],\"featherRadii\":[\n\n],\"featherRelCornerAngles\":[\n\n],\"featherRelSegLocs\":[\n\n],\"featherSegLocs\":[\n\n],\"featherTensions\":[\n\n],\"featherTypes\":[\n\n],\"inTangents\":[[40.8000183105469,-7.20001220703125],[0,0],[-26.4000091552734,0],[0,0]],\"outTangents\":[[-40.8000030517578,7.20001220703125],[0,0],[26.4000091552734,0],[0,0]],\"vertices\":[[-199.199981689453,-230.399978637695],[-297.599975585938,-314.399932861328],[-230.399978637695,-201.599975585938],[-88.7999725341797,-237.599975585938]]}"
+                                                  }
+                                                ],
+                                                "enabled": true
+                                              },
+                                              {
+                                                "matchName": "ADBE Vector Graphic - Stroke",
+                                                "name": "Stroke 1",
+                                                "type": "NAMED_GROUP",
+                                                "properties": [
+                                                  {
+                                                    "matchName": "ADBE Vector Stroke Color",
+                                                    "name": "Color",
+                                                    "type": "PROPERTY",
+                                                    "enabled": true,
+                                                    "expression": "",
+                                                    "value": "[0.08036900311708,0.78823500871658,0.61335098743439,1]"
+                                                  },
+                                                  {
+                                                    "matchName": "ADBE Vector Stroke Width",
+                                                    "name": "Stroke Width",
+                                                    "type": "PROPERTY",
+                                                    "enabled": true,
+                                                    "expression": "",
+                                                    "value": "0"
+                                                  },
+                                                  {
+                                                    "matchName": "ADBE Vector Stroke Dashes",
+                                                    "name": "Dashes",
+                                                    "type": "NAMED_GROUP",
+                                                    "properties": [
+                                                      
+                                                    ],
+                                                    "enabled": true
+                                                  },
+                                                  {
+                                                    "matchName": "ADBE Vector Stroke Taper",
+                                                    "name": "Taper",
+                                                    "type": "NAMED_GROUP",
+                                                    "properties": [
+                                                      
+                                                    ],
+                                                    "enabled": true
+                                                  },
+                                                  {
+                                                    "matchName": "ADBE Vector Stroke Wave",
+                                                    "name": "Wave",
+                                                    "type": "NAMED_GROUP",
+                                                    "properties": [
+                                                      
+                                                    ],
+                                                    "enabled": true
+                                                  }
+                                                ],
+                                                "enabled": true
+                                              },
+                                              {
+                                                "matchName": "ADBE Vector Graphic - Fill",
+                                                "name": "Fill 1",
+                                                "type": "NAMED_GROUP",
+                                                "properties": [
+                                                  {
+                                                    "matchName": "ADBE Vector Fill Color",
+                                                    "name": "Color",
+                                                    "type": "PROPERTY",
+                                                    "enabled": true,
+                                                    "expression": "",
+                                                    "value": "[0.06717415899038,0.65882354974747,0.6518629193306,1]"
+                                                  }
+                                                ],
+                                                "enabled": true
+                                              }
+                                            ],
+                                            "enabled": true
+                                          },
+                                          {
+                                            "matchName": "ADBE Vector Transform Group",
+                                            "name": "Transform",
+                                            "type": "NAMED_GROUP",
+                                            "properties": [
+                                              
+                                            ],
+                                            "enabled": true
+                                          },
+                                          {
+                                            "matchName": "ADBE Vector Materials Group",
+                                            "name": "Material Options",
+                                            "type": "NAMED_GROUP",
+                                            "properties": [
+                                              
+                                            ],
+                                            "enabled": true
+                                          }
+                                        ],
+                                        "enabled": true
+                                      }
+                                    ],
+                                    "enabled": true
+                                  },
+                                  {
+                                    "matchName": "ADBE Vector Transform Group",
+                                    "name": "Transform",
+                                    "type": "NAMED_GROUP",
+                                    "properties": [
+                                      {
+                                        "matchName": "ADBE Vector Position",
+                                        "name": "Position",
+                                        "type": "PROPERTY",
+                                        "enabled": true,
+                                        "expression": "",
+                                        "value": "[287.426239013672,324.378173828125]"
+                                      },
+                                      {
+                                        "matchName": "ADBE Vector Rotation",
+                                        "name": "Rotation",
+                                        "type": "PROPERTY",
+                                        "enabled": true,
+                                        "expression": "",
+                                        "value": "-36.9380874633789"
+                                      }
+                                    ],
+                                    "enabled": true
+                                  },
+                                  {
+                                    "matchName": "ADBE Vector Materials Group",
+                                    "name": "Material Options",
+                                    "type": "NAMED_GROUP",
+                                    "properties": [
+                                      
+                                    ],
+                                    "enabled": true
+                                  }
+                                ],
+                                "enabled": true
+                              }
+                            ],
+                            "enabled": true
+                          },
+                          {
+                            "matchName": "ADBE Vector Transform Group",
+                            "name": "Transform",
+                            "type": "NAMED_GROUP",
+                            "properties": [
+                              {
+                                "matchName": "ADBE Vector Position",
+                                "name": "Position",
+                                "type": "PROPERTY",
+                                "enabled": true,
+                                "expression": "[0,0]",
+                                "value": "[0,0]"
+                              },
+                              {
+                                "matchName": "ADBE Vector Scale",
+                                "name": "Scale",
+                                "type": "PROPERTY",
+                                "enabled": true,
+                                "expression": "var unstretch = 605.040466308594\nvar endctrl = thisComp.layer(\"{{ end }}\");\nvar startctrl = thisComp.layer(\"{{ start }}\");\nvar c3r = endctrl(4)(\"Limber\")(\"End Size\")/2;\nvar c2r = endctrl(4)(\"Limber\")(\"Middle Size\")/2;\nvar c3siz = endctrl(2)(\"Admin\")(2)(\"p3blend\")(3)(3)[0]/2;\nvar c2siz = endctrl(2)(\"Admin\")(2)(\"p2blend\")(3)(3)[0]/2;\nvar s1plus = (endctrl(2)(\"Admin\")(2)(\"sides\")(3)(2)[1]);\n var newscale = 100+((s1plus-unstretch)/unstretch*100);\n[endctrl(4)(\"Limber\")(\"Link Length to Size Scale\") == true ? endctrl(4)(\"Limber\")(\"Size Scale\") : 100, newscale]",
+                                "value": "[100,100]"
+                              },
+                              {
+                                "matchName": "ADBE Vector Rotation",
+                                "name": "Rotation",
+                                "type": "PROPERTY",
+                                "enabled": true,
+                                "expression": "",
+                                "value": "180"
+                              }
+                            ],
+                            "enabled": true
+                          },
+                          {
+                            "matchName": "ADBE Vector Materials Group",
+                            "name": "Material Options",
+                            "type": "NAMED_GROUP",
+                            "properties": [
+                              
+                            ],
+                            "enabled": true
+                          }
+                        ],
+                        "enabled": true
+                      },
+                      {
+                        "matchName": "ADBE Vector Group",
+                        "name": "Rigged Upper",
+                        "type": "NAMED_GROUP",
+                        "properties": [
+                          {
+                            "matchName": "ADBE Vectors Group",
+                            "name": "Contents",
+                            "type": "INDEXED_GROUP",
+                            "properties": [
+                              {
+                                "matchName": "ADBE Vector Group",
+                                "name": "upperArm Group",
+                                "type": "NAMED_GROUP",
+                                "properties": [
+                                  {
+                                    "matchName": "ADBE Vectors Group",
+                                    "name": "Contents",
+                                    "type": "INDEXED_GROUP",
+                                    "properties": [
+                                      {
+                                        "matchName": "ADBE Vector Group",
+                                        "name": "Shape 1",
+                                        "type": "NAMED_GROUP",
+                                        "properties": [
+                                          {
+                                            "matchName": "ADBE Vectors Group",
+                                            "name": "Contents",
+                                            "type": "INDEXED_GROUP",
+                                            "properties": [
+                                              {
+                                                "matchName": "ADBE Vector Shape - Group",
+                                                "name": "Path 1",
+                                                "type": "NAMED_GROUP",
+                                                "properties": [
+                                                  {
+                                                    "matchName": "ADBE Vector Shape",
+                                                    "name": "Path",
+                                                    "type": "PROPERTY",
+                                                    "enabled": true,
+                                                    "expression": "",
+                                                    "value": "{\"closed\":true,\"featherInterps\":[\n\n],\"featherRadii\":[\n\n],\"featherRelCornerAngles\":[\n\n],\"featherRelSegLocs\":[\n\n],\"featherSegLocs\":[\n\n],\"featherTensions\":[\n\n],\"featherTypes\":[\n\n],\"inTangents\":[[80.80615234375,-34.8936157226562],[48,-14.3999938964844],[40.7999877929688,-50.4000244140625],[7.20001220703125,-9.59988403320312],[24,-50.4000244140625],[-43.2000122070312,-38.4000244140625],[-7.20001220703125,7.20001220703125],[-57.6000366210938,67.2000122070312],[4.79998779296875,7.2000732421875],[-81.6000366210938,2.40005493164062],[-67.199951171875,112.799896240234],[33.60009765625,14.4000244140625]],\"outTangents\":[[-105.600021362305,45.60009765625],[-48,14.3999938964844],[-40.7999877929688,50.4000244140625],[-7.20001220703125,9.60018920898438],[-24,50.4000244140625],[43.2000122070312,38.4000244140625],[7.20001220703125,-7.20001220703125],[57.6000061035156,-67.2000122070312],[-4.80001831054688,-7.1998291015625],[81.5999755859375,-2.39987182617188],[67.2000732421875,-112.799987792969],[-33.5999755859375,-14.4000244140625]],\"vertices\":[[-143.999969482422,-631.200073242188],[-268.799987792969,-475.199981689453],[-417.599975585938,-333.599975585938],[-434.399993896484,-206.400024414062],[-470.399993896484,-33.5999755859375],[-460.799987792969,136.800048828125],[-350.399963378906,122.400024414062],[-201.599975585938,-24],[-155.999969482422,-194.400024414062],[-55.199951171875,-228.000061035156],[160.799926757812,-369.599975585938],[57.5999755859375,-638.400390625]]}"
+                                                  }
+                                                ],
+                                                "enabled": true
+                                              },
+                                              {
+                                                "matchName": "ADBE Vector Graphic - Stroke",
+                                                "name": "Stroke 1",
+                                                "type": "NAMED_GROUP",
+                                                "properties": [
+                                                  {
+                                                    "matchName": "ADBE Vector Stroke Color",
+                                                    "name": "Color",
+                                                    "type": "PROPERTY",
+                                                    "enabled": true,
+                                                    "expression": "",
+                                                    "value": "[0.08036900311708,0.78823500871658,0.61335098743439,1]"
+                                                  },
+                                                  {
+                                                    "matchName": "ADBE Vector Stroke Width",
+                                                    "name": "Stroke Width",
+                                                    "type": "PROPERTY",
+                                                    "enabled": true,
+                                                    "expression": "",
+                                                    "value": "0"
+                                                  },
+                                                  {
+                                                    "matchName": "ADBE Vector Stroke Dashes",
+                                                    "name": "Dashes",
+                                                    "type": "NAMED_GROUP",
+                                                    "properties": [
+                                                      
+                                                    ],
+                                                    "enabled": true
+                                                  },
+                                                  {
+                                                    "matchName": "ADBE Vector Stroke Taper",
+                                                    "name": "Taper",
+                                                    "type": "NAMED_GROUP",
+                                                    "properties": [
+                                                      
+                                                    ],
+                                                    "enabled": true
+                                                  },
+                                                  {
+                                                    "matchName": "ADBE Vector Stroke Wave",
+                                                    "name": "Wave",
+                                                    "type": "NAMED_GROUP",
+                                                    "properties": [
+                                                      
+                                                    ],
+                                                    "enabled": true
+                                                  }
+                                                ],
+                                                "enabled": true
+                                              },
+                                              {
+                                                "matchName": "ADBE Vector Graphic - Fill",
+                                                "name": "Fill 1",
+                                                "type": "NAMED_GROUP",
+                                                "properties": [
+                                                  {
+                                                    "matchName": "ADBE Vector Fill Color",
+                                                    "name": "Color",
+                                                    "type": "PROPERTY",
+                                                    "enabled": true,
+                                                    "expression": "",
+                                                    "value": "[0.08913494646549,0.98823529481888,0.97765755653381,1]"
+                                                  }
+                                                ],
+                                                "enabled": true
+                                              }
+                                            ],
+                                            "enabled": true
+                                          },
+                                          {
+                                            "matchName": "ADBE Vector Transform Group",
+                                            "name": "Transform",
+                                            "type": "NAMED_GROUP",
+                                            "properties": [
+                                              
+                                            ],
+                                            "enabled": true
+                                          },
+                                          {
+                                            "matchName": "ADBE Vector Materials Group",
+                                            "name": "Material Options",
+                                            "type": "NAMED_GROUP",
+                                            "properties": [
+                                              
+                                            ],
+                                            "enabled": true
+                                          }
+                                        ],
+                                        "enabled": true
+                                      }
+                                    ],
+                                    "enabled": true
+                                  },
+                                  {
+                                    "matchName": "ADBE Vector Transform Group",
+                                    "name": "Transform",
+                                    "type": "NAMED_GROUP",
+                                    "properties": [
+                                      {
+                                        "matchName": "ADBE Vector Position",
+                                        "name": "Position",
+                                        "type": "PROPERTY",
+                                        "enabled": true,
+                                        "expression": "",
+                                        "value": "[287.426239013672,324.378173828125]"
+                                      },
+                                      {
+                                        "matchName": "ADBE Vector Rotation",
+                                        "name": "Rotation",
+                                        "type": "PROPERTY",
+                                        "enabled": true,
+                                        "expression": "",
+                                        "value": "-36.9380874633789"
+                                      }
+                                    ],
+                                    "enabled": true
+                                  },
+                                  {
+                                    "matchName": "ADBE Vector Materials Group",
+                                    "name": "Material Options",
+                                    "type": "NAMED_GROUP",
+                                    "properties": [
+                                      
+                                    ],
+                                    "enabled": true
+                                  }
+                                ],
+                                "enabled": true
+                              }
+                            ],
+                            "enabled": true
+                          },
+                          {
+                            "matchName": "ADBE Vector Transform Group",
+                            "name": "Transform",
+                            "type": "NAMED_GROUP",
+                            "properties": [
+                              {
+                                "matchName": "ADBE Vector Position",
+                                "name": "Position",
+                                "type": "PROPERTY",
+                                "enabled": true,
+                                "expression": "[0,0]",
+                                "value": "[0,0]"
+                              },
+                              {
+                                "matchName": "ADBE Vector Scale",
+                                "name": "Scale",
+                                "type": "PROPERTY",
+                                "enabled": true,
+                                "expression": "var unstretch = 605.040466308594\nvar endctrl = thisComp.layer(\"{{ end }}\");\nvar startctrl = thisComp.layer(\"{{ start }}\");\nvar c3r = endctrl(4)(\"Limber\")(\"End Size\")/2;\nvar c2r = endctrl(4)(\"Limber\")(\"Middle Size\")/2;\nvar c3siz = endctrl(2)(\"Admin\")(2)(\"p3blend\")(3)(3)[0]/2;\nvar c2siz = endctrl(2)(\"Admin\")(2)(\"p2blend\")(3)(3)[0]/2;\nvar s1plus = (endctrl(2)(\"Admin\")(2)(\"sides\")(3)(2)[1]);\n var newscale = 100+((s1plus-unstretch)/unstretch*100);\n[endctrl(4)(\"Limber\")(\"Link Length to Size Scale\") == true ? endctrl(4)(\"Limber\")(\"Size Scale\") : 100, newscale]",
+                                "value": "[100,100]"
+                              },
+                              {
+                                "matchName": "ADBE Vector Rotation",
+                                "name": "Rotation",
+                                "type": "PROPERTY",
+                                "enabled": true,
+                                "expression": "",
+                                "value": "180"
+                              }
+                            ],
+                            "enabled": true
+                          },
+                          {
+                            "matchName": "ADBE Vector Materials Group",
+                            "name": "Material Options",
+                            "type": "NAMED_GROUP",
+                            "properties": [
+                              
+                            ],
+                            "enabled": true
+                          }
+                        ],
+                        "enabled": true
+                      }
+                    ],
+                    "enabled": true
+                  },
+                  {
+                    "matchName": "ADBE Vector Transform Group",
+                    "name": "Transform",
+                    "type": "NAMED_GROUP",
+                    "properties": [
+                      {
+                        "matchName": "ADBE Vector Position",
+                        "name": "Position",
+                        "type": "PROPERTY",
+                        "enabled": true,
+                        "expression": "thisComp.layer(\"{{ end }}\").content(\"Admin\").content(\"p1\").transform.position",
+                        "value": "[925.200012207031,528]"
+                      },
+                      {
+                        "matchName": "ADBE Vector Rotation",
+                        "name": "Rotation",
+                        "type": "PROPERTY",
+                        "enabled": true,
+                        "expression": "thisComp.layer(\"{{ end }}\").content(\"Admin\").content(\"angles\").transform.anchorPoint[0]",
+                        "value": "213.02988264714"
+                      }
+                    ],
+                    "enabled": true
+                  },
+                  {
+                    "matchName": "ADBE Vector Materials Group",
+                    "name": "Material Options",
+                    "type": "NAMED_GROUP",
+                    "properties": [
+                      
+                    ],
+                    "enabled": true
+                  }
+                ],
+                "enabled": true
+              },
+              {
+                "matchName": "ADBE Vector Group",
+                "name": "Lower Group",
+                "type": "NAMED_GROUP",
+                "properties": [
+                  {
+                    "matchName": "ADBE Vectors Group",
+                    "name": "Contents",
+                    "type": "INDEXED_GROUP",
+                    "properties": [
+                      {
+                        "matchName": "ADBE Vector Group",
+                        "name": "Rigged Lower",
+                        "type": "NAMED_GROUP",
+                        "properties": [
+                          {
+                            "matchName": "ADBE Vectors Group",
+                            "name": "Contents",
+                            "type": "INDEXED_GROUP",
+                            "properties": [
+                              {
+                                "matchName": "ADBE Vector Group",
+                                "name": "lowerArm Group",
+                                "type": "NAMED_GROUP",
+                                "properties": [
+                                  {
+                                    "matchName": "ADBE Vectors Group",
+                                    "name": "Contents",
+                                    "type": "INDEXED_GROUP",
+                                    "properties": [
+                                      {
+                                        "matchName": "ADBE Vector Group",
+                                        "name": "Shape 1",
+                                        "type": "NAMED_GROUP",
+                                        "properties": [
+                                          {
+                                            "matchName": "ADBE Vectors Group",
+                                            "name": "Contents",
+                                            "type": "INDEXED_GROUP",
+                                            "properties": [
+                                              {
+                                                "matchName": "ADBE Vector Shape - Group",
+                                                "name": "Path 1",
+                                                "type": "NAMED_GROUP",
+                                                "properties": [
+                                                  {
+                                                    "matchName": "ADBE Vector Shape",
+                                                    "name": "Path",
+                                                    "type": "PROPERTY",
+                                                    "enabled": true,
+                                                    "expression": "",
+                                                    "value": "{\"closed\":true,\"featherInterps\":[\n\n],\"featherRadii\":[\n\n],\"featherRelCornerAngles\":[\n\n],\"featherRelSegLocs\":[\n\n],\"featherSegLocs\":[\n\n],\"featherTensions\":[\n\n],\"featherTypes\":[\n\n],\"inTangents\":[[64.7999877929688,0],[52.7999877929688,-36.0000152587891],[0,-43.1999816894531],[-67.2000122070312,-100.800018310547],[0,0],[-43.2000122070312,31.199951171875],[16.8000183105469,24],[4.79998779296875,14.4000549316406],[38.4000549316406,93.6000213623047]],\"outTangents\":[[-64.7999877929688,0],[-52.7999877929688,36],[0,43.199951171875],[67.2000122070312,100.799865722656],[0,0],[43.2000427246094,-31.199951171875],[-16.8000183105469,-24],[-4.79998779296875,-14.3998718261719],[-39.4236145019531,-96.0949859619141]],\"vertices\":[[-336,-11.9999847412109],[-458.399993896484,9.60002136230469],[-506.399993896484,148.800018310547],[-417.599975585938,386.400054931641],[-237.599975585938,645.599975585938],[-71.9999694824219,674.400024414062],[-64.7999572753906,544.800048828125],[-172.799987792969,376.800018310547],[-230.400024414062,127.199996948242]]}"
+                                                  }
+                                                ],
+                                                "enabled": true
+                                              },
+                                              {
+                                                "matchName": "ADBE Vector Graphic - Stroke",
+                                                "name": "Stroke 1",
+                                                "type": "NAMED_GROUP",
+                                                "properties": [
+                                                  {
+                                                    "matchName": "ADBE Vector Stroke Color",
+                                                    "name": "Color",
+                                                    "type": "PROPERTY",
+                                                    "enabled": true,
+                                                    "expression": "",
+                                                    "value": "[0.08036900311708,0.78823500871658,0.61335098743439,1]"
+                                                  },
+                                                  {
+                                                    "matchName": "ADBE Vector Stroke Width",
+                                                    "name": "Stroke Width",
+                                                    "type": "PROPERTY",
+                                                    "enabled": true,
+                                                    "expression": "",
+                                                    "value": "0"
+                                                  },
+                                                  {
+                                                    "matchName": "ADBE Vector Stroke Dashes",
+                                                    "name": "Dashes",
+                                                    "type": "NAMED_GROUP",
+                                                    "properties": [
+                                                      
+                                                    ],
+                                                    "enabled": true
+                                                  },
+                                                  {
+                                                    "matchName": "ADBE Vector Stroke Taper",
+                                                    "name": "Taper",
+                                                    "type": "NAMED_GROUP",
+                                                    "properties": [
+                                                      
+                                                    ],
+                                                    "enabled": true
+                                                  },
+                                                  {
+                                                    "matchName": "ADBE Vector Stroke Wave",
+                                                    "name": "Wave",
+                                                    "type": "NAMED_GROUP",
+                                                    "properties": [
+                                                      
+                                                    ],
+                                                    "enabled": true
+                                                  }
+                                                ],
+                                                "enabled": true
+                                              },
+                                              {
+                                                "matchName": "ADBE Vector Graphic - Fill",
+                                                "name": "Fill 1",
+                                                "type": "NAMED_GROUP",
+                                                "properties": [
+                                                  {
+                                                    "matchName": "ADBE Vector Fill Color",
+                                                    "name": "Color",
+                                                    "type": "PROPERTY",
+                                                    "enabled": true,
+                                                    "expression": "",
+                                                    "value": "[0.09019607843137,0.98823535395604,0.97647064807368,1]"
+                                                  }
+                                                ],
+                                                "enabled": true
+                                              }
+                                            ],
+                                            "enabled": true
+                                          },
+                                          {
+                                            "matchName": "ADBE Vector Transform Group",
+                                            "name": "Transform",
+                                            "type": "NAMED_GROUP",
+                                            "properties": [
+                                              
+                                            ],
+                                            "enabled": true
+                                          },
+                                          {
+                                            "matchName": "ADBE Vector Materials Group",
+                                            "name": "Material Options",
+                                            "type": "NAMED_GROUP",
+                                            "properties": [
+                                              
+                                            ],
+                                            "enabled": true
+                                          }
+                                        ],
+                                        "enabled": true
+                                      }
+                                    ],
+                                    "enabled": true
+                                  },
+                                  {
+                                    "matchName": "ADBE Vector Transform Group",
+                                    "name": "Transform",
+                                    "type": "NAMED_GROUP",
+                                    "properties": [
+                                      {
+                                        "matchName": "ADBE Vector Position",
+                                        "name": "Position",
+                                        "type": "PROPERTY",
+                                        "enabled": true,
+                                        "expression": "",
+                                        "value": "[381.09130859375,127.100677490234]"
+                                      },
+                                      {
+                                        "matchName": "ADBE Vector Rotation",
+                                        "name": "Rotation",
+                                        "type": "PROPERTY",
+                                        "enabled": true,
+                                        "expression": "",
+                                        "value": "25.8242073059082"
+                                      }
+                                    ],
+                                    "enabled": true
+                                  },
+                                  {
+                                    "matchName": "ADBE Vector Materials Group",
+                                    "name": "Material Options",
+                                    "type": "NAMED_GROUP",
+                                    "properties": [
+                                      
+                                    ],
+                                    "enabled": true
+                                  }
+                                ],
+                                "enabled": true
+                              }
+                            ],
+                            "enabled": true
+                          },
+                          {
+                            "matchName": "ADBE Vector Transform Group",
+                            "name": "Transform",
+                            "type": "NAMED_GROUP",
+                            "properties": [
+                              {
+                                "matchName": "ADBE Vector Position",
+                                "name": "Position",
+                                "type": "PROPERTY",
+                                "enabled": true,
+                                "expression": "[0,0]",
+                                "value": "[0,0]"
+                              },
+                              {
+                                "matchName": "ADBE Vector Scale",
+                                "name": "Scale",
+                                "type": "PROPERTY",
+                                "enabled": true,
+                                "expression": "var unstretch = 622.573425292969\nvar endctrl = thisComp.layer(\"{{ end }}\");\nvar startctrl = thisComp.layer(\"{{ start }}\");\nvar c3r = endctrl(4)(\"Limber\")(\"End Size\")/2;\nvar c2r = endctrl(4)(\"Limber\")(\"Middle Size\")/2;\nvar c3siz = endctrl(2)(\"Admin\")(2)(\"p3blend\")(3)(3)[0]/2;\nvar c2siz = endctrl(2)(\"Admin\")(2)(\"p2blend\")(3)(3)[0]/2;\nvar s1plus = (endctrl(2)(\"Admin\")(2)(\"sides\")(3)(2)[0]);\n var newscale = 100+((s1plus-unstretch)/unstretch*100);\n[endctrl(4)(\"Limber\")(\"Link Length to Size Scale\") == true ? endctrl(4)(\"Limber\")(\"Size Scale\") : 100, newscale]",
+                                "value": "[100,100]"
+                              },
+                              {
+                                "matchName": "ADBE Vector Rotation",
+                                "name": "Rotation",
+                                "type": "PROPERTY",
+                                "enabled": true,
+                                "expression": "",
+                                "value": "180"
+                              }
+                            ],
+                            "enabled": true
+                          },
+                          {
+                            "matchName": "ADBE Vector Materials Group",
+                            "name": "Material Options",
+                            "type": "NAMED_GROUP",
+                            "properties": [
+                              
+                            ],
+                            "enabled": true
+                          }
+                        ],
+                        "enabled": true
+                      }
+                    ],
+                    "enabled": true
+                  },
+                  {
+                    "matchName": "ADBE Vector Transform Group",
+                    "name": "Transform",
+                    "type": "NAMED_GROUP",
+                    "properties": [
+                      {
+                        "matchName": "ADBE Vector Position",
+                        "name": "Position",
+                        "type": "PROPERTY",
+                        "enabled": true,
+                        "expression": "thisComp.layer(\"{{ end }}\").content(\"Admin\").content(\"p2blend\").transform.position",
+                        "value": "[595.406751102506,1035.25769664044]"
+                      },
+                      {
+                        "matchName": "ADBE Vector Rotation",
+                        "name": "Rotation",
+                        "type": "PROPERTY",
+                        "enabled": true,
+                        "expression": "thisComp.layer(\"{{ end }}\").content(\"Admin\").content(\"angles\").transform.anchorPoint[1]",
+                        "value": "111.160959139568"
+                      }
+                    ],
+                    "enabled": true
+                  },
+                  {
+                    "matchName": "ADBE Vector Materials Group",
+                    "name": "Material Options",
+                    "type": "NAMED_GROUP",
+                    "properties": [
+                      
+                    ],
+                    "enabled": true
+                  }
+                ],
+                "enabled": true
+              }
+            ],
+            "enabled": true
+          },
+          {
+            "matchName": "ADBE Vector Transform Group",
+            "name": "Transform",
+            "type": "NAMED_GROUP",
+            "properties": [
+              
+            ],
+            "enabled": true
+          },
+          {
+            "matchName": "ADBE Vector Materials Group",
+            "name": "Material Options",
+            "type": "NAMED_GROUP",
+            "properties": [
+              
+            ],
+            "enabled": true
+          }
+        ],
+        "enabled": true
+      },
+      {
+        "matchName": "ADBE Vector Group",
+        "name": "Admin",
+        "type": "NAMED_GROUP",
+        "properties": [
+          {
+            "matchName": "ADBE Vectors Group",
+            "name": "Contents",
+            "type": "INDEXED_GROUP",
+            "properties": [
+              
+            ],
+            "enabled": true
+          },
+          {
+            "matchName": "ADBE Vector Transform Group",
+            "name": "Transform",
+            "type": "NAMED_GROUP",
+            "properties": [
+              {
+                "matchName": "ADBE Vector Scale",
+                "name": "Scale",
+                "type": "PROPERTY",
+                "enabled": true,
+                "expression": "////// LIMBER 1.6.1 //////\nvar limbLayers = {\nankle: thisComp.layer(\"{{ end }}\"),\nhip: thisComp.layer(\"{{ start }}\"),\nleg: thisComp.layer(\"{{ limb }}\")\n};\nvalue;",
+                "value": "[100,100]"
+              }
+            ],
+            "enabled": true
+          },
+          {
+            "matchName": "ADBE Vector Materials Group",
+            "name": "Material Options",
+            "type": "NAMED_GROUP",
+            "properties": [
+              
+            ],
+            "enabled": true
+          }
+        ],
+        "enabled": false
+      }
+    ]
+  },
+  "effects": {
+    "matchName": "ADBE Effect Parade",
+    "type": "INDEXED_GROUP",
+    "properties": [
+      
+    ]
+  },
+  "transform": {
+    "matchName": "ADBE Transform Group",
+    "type": "INDEXED_GROUP",
+    "properties": [
+      {
+        "matchName": "ADBE Anchor Point",
+        "name": "Anchor Point",
+        "type": "PROPERTY",
+        "enabled": true,
+        "expression": "[0,0];",
+        "value": "[0,0,0]"
+      },
+      {
+        "matchName": "ADBE Position",
+        "name": "Position",
+        "type": "PROPERTY",
+        "enabled": true,
+        "expression": "var val = [0,0];\nif (thisLayer.hasParent) val = parent.fromWorld([0,0,0]);\n[val[0],val[1],0];",
+        "value": "[0,0,0]"
+      },
+      {
+        "matchName": "ADBE Position_0",
+        "name": "X Position",
+        "type": "PROPERTY",
+        "enabled": true,
+        "value": "0"
+      },
+      {
+        "matchName": "ADBE Position_1",
+        "name": "Y Position",
+        "type": "PROPERTY",
+        "enabled": true,
+        "value": "0"
+      },
+      {
+        "matchName": "ADBE Rotate Z",
+        "name": "Rotation",
+        "type": "PROPERTY",
+        "enabled": true,
+        "expression": "var curlayer = thisLayer; \nvar rot = 0; \nwhile(curlayer.hasParent){rot += curlayer.parent(\"ADBE Transform Group\")(\"ADBE Rotate Z\"); \ncurlayer = curlayer.parent;} -rot;",
+        "value": "0"
+      }
+    ]
+  }
+}

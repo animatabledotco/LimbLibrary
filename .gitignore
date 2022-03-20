@@ -1,16 +1,9 @@
 .DS_Store
 
 # Images
-images/avatars/
-images/captchas/
-images/smileys/
-images/member_photos/
-images/signature_attachments/
-images/pm_attachments/
+dist/
 
-# For security do not publish the following files
-system/expressionengine/config/database.php
-system/expressionengine/config/config.php
+node_modules/
 
 # Caches
 sized/
