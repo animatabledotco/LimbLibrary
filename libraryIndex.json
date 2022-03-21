@@ -1,6 +1,24 @@
 {
-    "Hand": {
-        "name": "Hand",
-        "url": "fake_url"
-    }
+    "limbs": [
+        {
+            "label": "3D sleeve",
+            "url": "3dSleeve.json",
+            "type": "limb"
+        },
+        {
+            "type": "limb",
+            "label": "Angled Splits",
+            "url": "angledSplits.json"
+        },
+        {
+            "type": "limb",
+            "label": "Curved Taper",
+            "url": "curveTaper.json"
+        },
+        {
+            "type": "limb",
+            "label": "Elbow Crease",
+            "url": "elbowCrease.json"
+        }
+    ]
 }
