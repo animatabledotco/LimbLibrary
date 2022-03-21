@@ -1,9 +1,9 @@
 {
     "limbs": [
         {
+            "type": "limb",
             "label": "3D sleeve",
-            "url": "3dSleeve.json",
-            "type": "limb"
+            "url": "3dSleeve.json"
         },
         {
             "type": "limb",
@@ -19,6 +19,46 @@
             "type": "limb",
             "label": "Elbow Crease",
             "url": "elbowCrease.json"
+        },
+        {
+            "type": "limb",
+            "label": "Half Limb",
+            "url": "halfLimb.json"
+        },
+        {
+            "type": "limb",
+            "label": "Hand",
+            "url": "hand.json"
+        },
+        {
+            "type": "limb",
+            "label": "Ogre",
+            "url": "ogre.json"
+        },
+        {
+            "type": "limb",
+            "label": "Riggable Bone",
+            "url": "riggableBone.json"
+        },
+        {
+            "type": "limb",
+            "label": "Shorts and Socks",
+            "url": "shortsnSocks.json"
+        },
+        {
+            "type": "limb",
+            "label": "stroked Pant",
+            "url": "strokedPant.json"
+        },
+        {
+            "type": "limb",
+            "label": "Tapered Stroke",
+            "url": "taperedStroke.json"
+        },
+        {
+            "type": "limb",
+            "label": "T-shirt",
+            "url": "tshirt.json"
         }
     ]
 }
