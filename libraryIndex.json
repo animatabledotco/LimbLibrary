@@ -59,6 +59,18 @@
             "type": "limb",
             "label": "T-shirt",
             "url": "tshirt.json"
+        },
+        {
+            "type": "node",
+            "label": "Bone Based",
+            "url": "bone_based",
+            "contents": [
+                {
+                    "type": "limb",
+                    "label": "Bone with Foot",
+                    "url": "boneWithFoot.json"
+                }
+            ]
         }
     ]
 }
