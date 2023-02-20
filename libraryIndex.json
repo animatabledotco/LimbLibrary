@@ -64,7 +64,7 @@
             "type": "node",
             "label": "Bone Based",
             "url": "bone_based",
-            "contents": [
+            "limbs": [
                 {
                     "type": "limb",
                     "label": "Bone with Foot",
