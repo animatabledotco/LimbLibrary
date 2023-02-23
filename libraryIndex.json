@@ -34,7 +34,8 @@
                 {
                     "type": "limb",
                     "label": "Hand",
-                    "url": "hand.json"
+                    "url": "hand.json",
+                    "img": "hand.png"
                 },
                 {
                     "type": "limb",
