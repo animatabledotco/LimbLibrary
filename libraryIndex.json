@@ -76,7 +76,8 @@
                 {
                     "type": "limb",
                     "label": "Bone with Foot",
-                    "url": "boneWithFoot.json"
+                    "url": "boneWithFoot.json",
+                    "img": "boneWithFoot.png"
                 }
             ]
         }
