@@ -24,7 +24,8 @@
                 {
                     "type": "limb",
                     "label": "Elbow Crease",
-                    "url": "elbowCrease.json"
+                    "url": "elbowCrease.json",
+                    "img": "elbowCrease.png"
                 },
                 {
                     "type": "limb",
