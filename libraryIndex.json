@@ -9,39 +9,46 @@
                 {
                     "type": "limb",
                     "label": "3D sleeve",
-                    "url": "3dSleeve.json"
+                    "url": "3dSleeve.json",
+                    "description": "This is description for the 3d Sleeve"
                 },
                 {
                     "type": "limb",
                     "label": "Angled Splits",
-                    "url": "angledSplits.json"
+                    "url": "angledSplits.json",
+                    "description": "This is description for the angled splits"
                 },
                 {
                     "type": "limb",
                     "label": "Curved Taper",
-                    "url": "curveTaper.json"
+                    "url": "curveTaper.json",
+                    "description": "curved taper anyone?"
                 },
                 {
                     "type": "limb",
                     "label": "Elbow Crease",
                     "url": "elbowCrease.json",
-                    "img": "elbowCrease.png"
+                    "img": "elbowCrease.png",
+                    "description": "elbow crease description."
                 },
                 {
                     "type": "limb",
                     "label": "Half Limb",
-                    "url": "halfLimb.json"
+                    "url": "halfLimb.json",
+                    "description": "half limb over here."
                 },
                 {
                     "type": "limb",
                     "label": "Hand",
                     "url": "hand.json",
-                    "img": "hand.png"
+                    "img": "hand.png",
+                    "description": "let's give this limb a hand!"
                 },
                 {
                     "type": "limb",
                     "label": "Ogre",
-                    "url": "ogre.json"
+                    "url": "ogre.json",
+                    "description": "Meat is back on the menu boys."
                 },
                 {
                     "type": "limb",
