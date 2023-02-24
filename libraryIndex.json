@@ -52,13 +52,14 @@
                     "type": "limb",
                     "label": "Ogre",
                     "url": "ogre.json",
-                    "img": "ogre.img",
+                    "img": "ogre.png",
                     "description": "Meat is back on the menu boys."
                 },
                 {
                     "type": "limb",
                     "label": "Riggable Bone",
-                    "url": "riggableBone.json"
+                    "url": "riggableBone.json",
+                    "description": "So riggable!"
                 },
                 {
                     "type": "limb",
