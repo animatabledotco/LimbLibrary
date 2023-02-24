@@ -10,18 +10,21 @@
                     "type": "limb",
                     "label": "3D sleeve",
                     "url": "3dSleeve.json",
+                    "img": "3dSleeve.png",
                     "description": "This is description for the 3d Sleeve"
                 },
                 {
                     "type": "limb",
                     "label": "Angled Splits",
                     "url": "angledSplits.json",
+                    "png": "angledSplits.png",
                     "description": "This is description for the angled splits"
                 },
                 {
                     "type": "limb",
                     "label": "Curved Taper",
                     "url": "curveTaper.json",
+                    "img": "curveTaper.img",
                     "description": "curved taper anyone?"
                 },
                 {
