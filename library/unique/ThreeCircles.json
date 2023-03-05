@@ -1,0 +1,511 @@
+{
+  "shapes": {
+    "matchName": "ADBE Root Vectors Group",
+    "type": "INDEXED_GROUP",
+    "properties": [
+      {
+        "matchName": "ADBE Vector Group",
+        "name": "Limb",
+        "type": "NAMED_GROUP",
+        "properties": [
+          {
+            "matchName": "ADBE Vectors Group",
+            "name": "Contents",
+            "type": "INDEXED_GROUP",
+            "properties": [
+              {
+                "matchName": "ADBE Vector Group",
+                "name": "Upper Group",
+                "type": "NAMED_GROUP",
+                "properties": [
+                  {
+                    "matchName": "ADBE Vectors Group",
+                    "name": "Contents",
+                    "type": "INDEXED_GROUP",
+                    "properties": [
+                      {
+                        "matchName": "ADBE Vector Group",
+                        "name": "C1 Group",
+                        "type": "NAMED_GROUP",
+                        "properties": [
+                          {
+                            "matchName": "ADBE Vectors Group",
+                            "name": "Contents",
+                            "type": "INDEXED_GROUP",
+                            "properties": [
+                              {
+                                "matchName": "ADBE Vector Shape - Ellipse",
+                                "name": "C1",
+                                "type": "NAMED_GROUP",
+                                "properties": [
+                                  {
+                                    "matchName": "ADBE Vector Ellipse Size",
+                                    "name": "Size",
+                                    "type": "PROPERTY",
+                                    "enabled": true,
+                                    "expression": "var endctrl  = thisComp.layer(\"{{ end }}\"); \n\nendctrl.content(\"Admin\").content(\"p1\").transform.scale;",
+                                    "value": "[100,100]"
+                                  }
+                                ],
+                                "enabled": true
+                              },
+                              {
+                                "matchName": "ADBE Vector Graphic - Fill",
+                                "name": "Fill",
+                                "type": "NAMED_GROUP",
+                                "properties": [
+                                  {
+                                    "matchName": "ADBE Vector Fill Color",
+                                    "name": "Color",
+                                    "type": "PROPERTY",
+                                    "enabled": true,
+                                    "expression": "var endctrl = thisComp.layer(\"{{ end }}\"); endctrl.effect(\"Limber\")(\"Upper Color\");",
+                                    "value": "[0.17647058823529,0.54901960784314,0.92156862745098,1]"
+                                  }
+                                ],
+                                "enabled": true
+                              }
+                            ],
+                            "enabled": true
+                          },
+                          {
+                            "matchName": "ADBE Vector Transform Group",
+                            "name": "Transform",
+                            "type": "NAMED_GROUP",
+                            "properties": [
+                              
+                            ],
+                            "enabled": true
+                          },
+                          {
+                            "matchName": "ADBE Vector Materials Group",
+                            "name": "Material Options",
+                            "type": "NAMED_GROUP",
+                            "properties": [
+                              
+                            ],
+                            "enabled": true
+                          }
+                        ],
+                        "enabled": true
+                      },
+                      {
+                        "matchName": "ADBE Vector Group",
+                        "name": "C2 Group",
+                        "type": "NAMED_GROUP",
+                        "properties": [
+                          {
+                            "matchName": "ADBE Vectors Group",
+                            "name": "Contents",
+                            "type": "INDEXED_GROUP",
+                            "properties": [
+                              {
+                                "matchName": "ADBE Vector Shape - Ellipse",
+                                "name": "C2",
+                                "type": "NAMED_GROUP",
+                                "properties": [
+                                  {
+                                    "matchName": "ADBE Vector Ellipse Size",
+                                    "name": "Size",
+                                    "type": "PROPERTY",
+                                    "enabled": true,
+                                    "expression": "var endctrl  = thisComp.layer(\"{{ end }}\"); \n\nendctrl.content(\"Admin\").content(\"p2blend\").transform.scale;",
+                                    "value": "[70,70]"
+                                  }
+                                ],
+                                "enabled": true
+                              },
+                              {
+                                "matchName": "ADBE Vector Graphic - Fill",
+                                "name": "Fill",
+                                "type": "NAMED_GROUP",
+                                "properties": [
+                                  {
+                                    "matchName": "ADBE Vector Fill Color",
+                                    "name": "Color",
+                                    "type": "PROPERTY",
+                                    "enabled": true,
+                                    "expression": "var endctrl = thisComp.layer(\"{{ end }}\"); endctrl.effect(\"Limber\")(\"Middle Color\");",
+                                    "value": "[0.17647058823529,0.54901960784314,0.92156862745098,1]"
+                                  }
+                                ],
+                                "enabled": true
+                              }
+                            ],
+                            "enabled": true
+                          },
+                          {
+                            "matchName": "ADBE Vector Transform Group",
+                            "name": "Transform",
+                            "type": "NAMED_GROUP",
+                            "properties": [
+                              {
+                                "matchName": "ADBE Vector Position",
+                                "name": "Position",
+                                "type": "PROPERTY",
+                                "enabled": true,
+                                "expression": "var endctrl = thisComp.layer(\"{{ end }}\");\n[0,-endctrl.content(\"Admin\").content(\"sides\").transform.position[1]];",
+                                "value": "[0,-200]"
+                              }
+                            ],
+                            "enabled": true
+                          },
+                          {
+                            "matchName": "ADBE Vector Materials Group",
+                            "name": "Material Options",
+                            "type": "NAMED_GROUP",
+                            "properties": [
+                              
+                            ],
+                            "enabled": true
+                          }
+                        ],
+                        "enabled": true
+                      }
+                    ],
+                    "enabled": true
+                  },
+                  {
+                    "matchName": "ADBE Vector Transform Group",
+                    "name": "Transform",
+                    "type": "NAMED_GROUP",
+                    "properties": [
+                      {
+                        "matchName": "ADBE Vector Position",
+                        "name": "Position",
+                        "type": "PROPERTY",
+                        "enabled": true,
+                        "expression": "var endctrl  = thisComp.layer(\"{{ end }}\"); \n\nendctrl.content(\"Admin\").content(\"p1\").transform.position;",
+                        "value": "[300,150]"
+                      },
+                      {
+                        "matchName": "ADBE Vector Rotation",
+                        "name": "Rotation",
+                        "type": "PROPERTY",
+                        "enabled": true,
+                        "expression": "var endctrl  = thisComp.layer(\"{{ end }}\"); \n\nendctrl.content(\"Admin\").content(\"angles\").transform.anchorPoint[0];",
+                        "value": "138.590377890729"
+                      }
+                    ],
+                    "enabled": true
+                  },
+                  {
+                    "matchName": "ADBE Vector Materials Group",
+                    "name": "Material Options",
+                    "type": "NAMED_GROUP",
+                    "properties": [
+                      
+                    ],
+                    "enabled": true
+                  }
+                ],
+                "enabled": true
+              },
+              {
+                "matchName": "ADBE Vector Group",
+                "name": "Lower Group",
+                "type": "NAMED_GROUP",
+                "properties": [
+                  {
+                    "matchName": "ADBE Vectors Group",
+                    "name": "Contents",
+                    "type": "INDEXED_GROUP",
+                    "properties": [
+                      {
+                        "matchName": "ADBE Vector Group",
+                        "name": "C2 Group",
+                        "type": "NAMED_GROUP",
+                        "properties": [
+                          {
+                            "matchName": "ADBE Vectors Group",
+                            "name": "Contents",
+                            "type": "INDEXED_GROUP",
+                            "properties": [
+                              {
+                                "matchName": "ADBE Vector Shape - Ellipse",
+                                "name": "C2",
+                                "type": "NAMED_GROUP",
+                                "properties": [
+                                  {
+                                    "matchName": "ADBE Vector Ellipse Size",
+                                    "name": "Size",
+                                    "type": "PROPERTY",
+                                    "enabled": true,
+                                    "expression": "var endctrl  = thisComp.layer(\"{{ end }}\"); \n\nendctrl.content(\"Admin\").content(\"p2blend\").transform.scale;",
+                                    "value": "[70,70]"
+                                  }
+                                ],
+                                "enabled": true
+                              },
+                              {
+                                "matchName": "ADBE Vector Graphic - Fill",
+                                "name": "Fill",
+                                "type": "NAMED_GROUP",
+                                "properties": [
+                                  {
+                                    "matchName": "ADBE Vector Fill Color",
+                                    "name": "Color",
+                                    "type": "PROPERTY",
+                                    "enabled": true,
+                                    "expression": "var endctrl = thisComp.layer(\"{{ end }}\");\nendctrl.effect(\"Limber\")(\"Middle Color\");",
+                                    "value": "[0.17647058823529,0.54901960784314,0.92156862745098,1]"
+                                  }
+                                ],
+                                "enabled": true
+                              }
+                            ],
+                            "enabled": true
+                          },
+                          {
+                            "matchName": "ADBE Vector Transform Group",
+                            "name": "Transform",
+                            "type": "NAMED_GROUP",
+                            "properties": [
+                              
+                            ],
+                            "enabled": true
+                          },
+                          {
+                            "matchName": "ADBE Vector Materials Group",
+                            "name": "Material Options",
+                            "type": "NAMED_GROUP",
+                            "properties": [
+                              
+                            ],
+                            "enabled": true
+                          }
+                        ],
+                        "enabled": true
+                      },
+                      {
+                        "matchName": "ADBE Vector Group",
+                        "name": "C3 Group",
+                        "type": "NAMED_GROUP",
+                        "properties": [
+                          {
+                            "matchName": "ADBE Vectors Group",
+                            "name": "Contents",
+                            "type": "INDEXED_GROUP",
+                            "properties": [
+                              {
+                                "matchName": "ADBE Vector Shape - Ellipse",
+                                "name": "C3",
+                                "type": "NAMED_GROUP",
+                                "properties": [
+                                  {
+                                    "matchName": "ADBE Vector Ellipse Size",
+                                    "name": "Size",
+                                    "type": "PROPERTY",
+                                    "enabled": true,
+                                    "expression": "var endctrl  = thisComp.layer(\"{{ end }}\"); \n\nendctrl.content(\"Admin\").content(\"p3ik\").transform.scale;",
+                                    "value": "[40,40]"
+                                  }
+                                ],
+                                "enabled": true
+                              },
+                              {
+                                "matchName": "ADBE Vector Graphic - Fill",
+                                "name": "Fill",
+                                "type": "NAMED_GROUP",
+                                "properties": [
+                                  {
+                                    "matchName": "ADBE Vector Fill Color",
+                                    "name": "Color",
+                                    "type": "PROPERTY",
+                                    "enabled": true,
+                                    "expression": "var endctrl = thisComp.layer(\"{{ end }}\");\nendctrl.effect(\"Limber\")(\"Lower Color\");",
+                                    "value": "[0.74509805440903,0.56078433990479,0.41568627953529,1]"
+                                  }
+                                ],
+                                "enabled": true
+                              }
+                            ],
+                            "enabled": true
+                          },
+                          {
+                            "matchName": "ADBE Vector Transform Group",
+                            "name": "Transform",
+                            "type": "NAMED_GROUP",
+                            "properties": [
+                              {
+                                "matchName": "ADBE Vector Position",
+                                "name": "Position",
+                                "type": "PROPERTY",
+                                "enabled": true,
+                                "expression": "var endctrl  = thisComp.layer(\"{{ end }}\"); \n[0,-endctrl.content(\"Admin\").content(\"sides\").transform.position[0]];",
+                                "value": "[0,-200]"
+                              },
+                              {
+                                "matchName": "ADBE Vector Scale",
+                                "name": "Scale",
+                                "type": "PROPERTY",
+                                "enabled": true,
+                                "expression": "var endctrl = thisComp.layer(\"{{ end }}\");\nif (endctrl.effect(\"Limber\")(\"Square End\")==true) [0,0];\nelse ([100,100]);",
+                                "value": "[100,100]"
+                              }
+                            ],
+                            "enabled": true
+                          },
+                          {
+                            "matchName": "ADBE Vector Materials Group",
+                            "name": "Material Options",
+                            "type": "NAMED_GROUP",
+                            "properties": [
+                              
+                            ],
+                            "enabled": true
+                          }
+                        ],
+                        "enabled": true
+                      }
+                    ],
+                    "enabled": true
+                  },
+                  {
+                    "matchName": "ADBE Vector Transform Group",
+                    "name": "Transform",
+                    "type": "NAMED_GROUP",
+                    "properties": [
+                      {
+                        "matchName": "ADBE Vector Position",
+                        "name": "Position",
+                        "type": "PROPERTY",
+                        "enabled": true,
+                        "expression": "var endctrl  = thisComp.layer(\"{{ end }}\"); \n\nendctrl.content(\"Admin\").content(\"p2blend\").transform.position;",
+                        "value": "[432.28756555323,300]"
+                      },
+                      {
+                        "matchName": "ADBE Vector Rotation",
+                        "name": "Rotation",
+                        "type": "PROPERTY",
+                        "enabled": true,
+                        "expression": "var endctrl  = thisComp.layer(\"{{ end }}\");\n\nendctrl.content(\"Admin\").content(\"angles\").transform.anchorPoint[1];",
+                        "value": "221.409622109271"
+                      }
+                    ],
+                    "enabled": true
+                  },
+                  {
+                    "matchName": "ADBE Vector Materials Group",
+                    "name": "Material Options",
+                    "type": "NAMED_GROUP",
+                    "properties": [
+                      
+                    ],
+                    "enabled": true
+                  }
+                ],
+                "enabled": true
+              }
+            ],
+            "enabled": true
+          },
+          {
+            "matchName": "ADBE Vector Transform Group",
+            "name": "Transform",
+            "type": "NAMED_GROUP",
+            "properties": [
+              
+            ],
+            "enabled": true
+          },
+          {
+            "matchName": "ADBE Vector Materials Group",
+            "name": "Material Options",
+            "type": "NAMED_GROUP",
+            "properties": [
+              
+            ],
+            "enabled": true
+          }
+        ],
+        "enabled": true
+      },
+      {
+        "matchName": "ADBE Vector Group",
+        "name": "Admin",
+        "type": "NAMED_GROUP",
+        "properties": [
+          {
+            "matchName": "ADBE Vectors Group",
+            "name": "Contents",
+            "type": "INDEXED_GROUP",
+            "properties": [
+              
+            ],
+            "enabled": true
+          },
+          {
+            "matchName": "ADBE Vector Transform Group",
+            "name": "Transform",
+            "type": "NAMED_GROUP",
+            "properties": [
+              {
+                "matchName": "ADBE Vector Scale",
+                "name": "Scale",
+                "type": "PROPERTY",
+                "enabled": true,
+                "expression": "////// LIMBER 1.6.1 //////\nvar limbLayers = {\nankle: thisComp.layer(\"{{ end }}\"),\nhip: thisComp.layer(\"{{ start }}\"),\nleg: thisComp.layer(\"{{ limb }}\")\n};\nvalue;",
+                "value": "[100,100]"
+              }
+            ],
+            "enabled": true
+          },
+          {
+            "matchName": "ADBE Vector Materials Group",
+            "name": "Material Options",
+            "type": "NAMED_GROUP",
+            "properties": [
+              
+            ],
+            "enabled": true
+          }
+        ],
+        "enabled": true
+      }
+    ]
+  },
+  "effects": {
+    "matchName": "ADBE Effect Parade",
+    "type": "INDEXED_GROUP",
+    "properties": [
+      
+    ]
+  },
+  "transform": {
+    "matchName": "ADBE Transform Group",
+    "type": "INDEXED_GROUP",
+    "properties": [
+      {
+        "matchName": "ADBE Anchor Point",
+        "name": "Anchor Point",
+        "type": "PROPERTY",
+        "enabled": true,
+        "expression": "[0,0];",
+        "value": "[0,0,0]"
+      },
+      {
+        "matchName": "ADBE Position",
+        "name": "Position",
+        "type": "PROPERTY",
+        "enabled": true,
+        "expression": "var val = [0,0];\nif (thisLayer.hasParent) val = parent.fromWorld([0,0,0]);\n[val[0],val[1],0];",
+        "value": "[0,0,0]"
+      },
+      {
+        "matchName": "ADBE Position_0",
+        "name": "X Position",
+        "type": "PROPERTY",
+        "enabled": true,
+        "value": "0"
+      },
+      {
+        "matchName": "ADBE Position_1",
+        "name": "Y Position",
+        "type": "PROPERTY",
+        "enabled": true,
+        "value": "0"
+      }
+    ]
+  }
+}

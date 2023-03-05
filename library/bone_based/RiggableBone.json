@@ -46,7 +46,7 @@
                         "type": "PROPERTY",
                         "enabled": true,
                         "expression": "thisComp.layer(\"{{ end }}\").content(\"Admin\").content(\"angles\").transform.anchorPoint[0]",
-                        "value": "143.148010154051"
+                        "value": "138.590377890729"
                       }
                     ],
                     "enabled": true
@@ -88,7 +88,7 @@
                         "type": "PROPERTY",
                         "enabled": true,
                         "expression": "thisComp.layer(\"{{ end }}\").content(\"Admin\").content(\"p2blend\").transform.position",
-                        "value": "[419.949986128369,310.03749819278]"
+                        "value": "[432.28756555323,300]"
                       },
                       {
                         "matchName": "ADBE Vector Rotation",
@@ -96,7 +96,7 @@
                         "type": "PROPERTY",
                         "enabled": true,
                         "expression": "thisComp.layer(\"{{ end }}\").content(\"Admin\").content(\"angles\").transform.anchorPoint[1]",
-                        "value": "231.697555817172"
+                        "value": "221.409622109271"
                       }
                     ],
                     "enabled": true
@@ -165,7 +165,7 @@
                     "type": "PROPERTY",
                     "enabled": true,
                     "expression": "var endctrl  = thisComp.layer(\"{{ end }}\");\nvar curveLin = endctrl.effect(\"Limber\")(\"Bone Curvature\")/100;\nif (curveLin === 0) {\n\tcreatePath([endctrl.content(\"Admin\").content(\"p1\").transform.position, endctrl.content(\"Admin\").content(\"p2blend\").transform.position, endctrl.content(\"Admin\").content(\"p3blend\").transform.position], [], [], 0);\n\t} else {\nvar angs = endctrl.content(\"Admin\").content(\"angles\").transform.anchorPoint;\nvar avang = degreesToRadians((angs[0]+angs[1]-180)/2);\nvar linkScale = endctrl.effect(\"Limber\")(\"Link Length to Size Scale\");\nvar tangLeng = curveLin * (endctrl(4)(\"Limber\")(\"Upper Length\")+endctrl.effect(\"Limber\")(\"Lower Length\")) / 2 * (linkScale == true ? endctrl.effect(\"Limber\")(\"Size Scale\")/100 : 1);\nvar tangPos = [Math.cos(avang) * tangLeng, Math.sin(avang) * tangLeng];\ncreatePath([endctrl.content(\"Admin\").content(\"p1\").transform.position, endctrl.content(\"Admin\").content(\"p2blend\").transform.position, endctrl.content(\"Admin\").content(\"p3blend\").transform.position], [[0,0], -tangPos, [0,0]], [[0,0], tangPos, [0,0]], 0);}",
-                    "value": "{\"closed\":false,\"featherInterps\":[\n\n],\"featherRadii\":[\n\n],\"featherRelCornerAngles\":[\n\n],\"featherRelSegLocs\":[\n\n],\"featherSegLocs\":[\n\n],\"featherTensions\":[\n\n],\"featherTypes\":[\n\n],\"inTangents\":[[0,0],[0,0],[0,0]],\"outTangents\":[[0,0],[0,0],[0,0]],\"vertices\":[[300,150],[419.949981689453,310.037506103516],[263,434]]}"
+                    "value": "{\"closed\":false,\"featherInterps\":[\n\n],\"featherRadii\":[\n\n],\"featherRelCornerAngles\":[\n\n],\"featherRelSegLocs\":[\n\n],\"featherSegLocs\":[\n\n],\"featherTensions\":[\n\n],\"featherTypes\":[\n\n],\"inTangents\":[[0,0],[0,0],[0,0]],\"outTangents\":[[0,0],[0,0],[0,0]],\"vertices\":[[300,150],[432.287567138672,300],[300,450]]}"
                   }
                 ],
                 "enabled": true

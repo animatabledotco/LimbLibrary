@@ -44,7 +44,7 @@
                                     "type": "PROPERTY",
                                     "enabled": true,
                                     "expression": "// Limber Taper\n// FUNCTIONS\nfunction midPoint(p1, p2, per) {\n\treturn [p1[0] + (p2[0] - p1[0]) * per, p1[1] + (p2[1] - p1[1]) * per];\n}\nfunction tangentsAbsolute(vertices, tans) {\n\tfor (var i = 0, il = vertices.length; i < il; i++) {\n\t\ttans[i] += vertices[i];\n\t}\n\treturn tans;\n}\nfunction tangentsRelative(vertices, tans) {\n\tfor (var i = 0, il = vertices.length; i < il; i++) {\n\t\ttans[i] -= vertices[i];\n\t}\n\treturn tans;\n}\nfunction fx(point) {\n\treturn [-point[0], point[1]];\n}\nfunction fy(point) {\n\treturn [point[0], -point[1]];\n}\nfunction fxy(point) {\n\treturn [-point[0], -point[1]];\n}\nfunction flipArrayY(vertices, flipPoint) {\n\tfor (var i = 0, il = vertices.length; i < il; i++) {\n\t\tvertices[i] = [vertices[i][0], flipPoint * 2 - vertices[i][1]];\n\t}\n\treturn vertices;\n}\nfunction pointAlongY(val, p1, p2) {\n\tvar linearValue = linear(val, p1[1], p2[1], p1[0], p2[0]);\n\treturn [linearValue, val];\n}\nfunction xOnCircleGivenY(x, r) {\n\treturn Math.sqrt((r * r) - (x * x));\n}\n// CONSTANTS\nvar semiFac = 0.5522847498307933; // factor for Bezier circles\nvar quad = (0.5 * Math.PI); // 90º\nvar groupName = thisProperty.propertyGroup(3).name;\nvar isUpper = groupName.split(\" \")[1] === \"Upper\";\nvar isProximal = groupName.split(\" \")[0] === \"Proximal\";\n// DOM ELEMENTS\nvar endctrl = thisComp.layer(\"{{ end }}\");\nvar lowerSplit = endctrl.effect(\"Limber\")(\"Lower Split\");\nvar lowerSplitValue = lowerSplit.value / 100;\nvar upperSplit = endctrl.effect(\"Limber\")(\"Upper Split\");\nvar upperSplitValue = upperSplit.value / 100;\nvar lowerRounding = endctrl.effect(\"Limber\")(\"Lower Rounding\");\nvar lowerRoundingValue = lowerRounding.value / 100;\nvar upperRounding = endctrl.effect(\"Limber\")(\"Upper Rounding\");\nvar upperRoundingValue = upperRounding.value / 100;\nvar squareEndValue = endctrl.effect(\"Limber\")(\"Square End\").value;\nvar sides = endctrl.content(\"Admin\").content(\"sides\").transform.position;\nif (isUpper) {var c2 = endctrl.content(\"Admin\").content(\"p2blend\").transform.scale; var c1 = endctrl.content(\"Admin\").content(\"p1\").transform.scale; var dist = sides[1]}\nelse {var c1 = endctrl.content(\"Admin\").content(\"p2blend\").transform.scale; var c2 = endctrl.content(\"Admin\").content(\"p3ik\").transform.scale;var dist = sides[0]}\n// DECLARE VARIABLES\nvar distrad = c2[0] * 0.5;\nvar proxrad = c1[0] * 0.5;\nvar pers = -lowerRoundingValue;\nvar splitY = isProximal ? lowerSplitValue : (1 - lowerSplitValue);\nif (isUpper) {\n\tpers = -upperRoundingValue;\n\tsplitY = isProximal ? upperSplitValue : (1 - upperSplitValue);\n}\nsplitY = -dist * splitY -0.5;\nvar rad1 = isProximal ? proxrad : distrad;\nvar rad2 = isProximal ? distrad : proxrad;\nvar A = Math.acos(clamp((rad2 - rad1) / dist, -1, 1));\nvar r3a = [(rad2 * Math.sin(A)), -(dist - rad2 * Math.cos(A))];\nvar r3b = [(rad1 * Math.sin(A)), (rad1 * Math.cos(A))];\nvar semiVerts = [\n\t[rad1, 0],\n\t[0, rad1],\n\t[-rad1, 0]\n];\nvar semiIns = tangentsAbsolute(semiVerts, [\n\t[0, 0],\n\t[(rad1 * semiFac), 0],\n\t[0, rad1 * semiFac]\n]);\nvar semiOuts = tangentsAbsolute(semiVerts, [\n\t[0, rad1 * semiFac],\n\t[-rad1 * semiFac, 0],\n\t[0, 0]\n]);\n// THE FOUR STATES\nif (rad2 < rad1) {\n\tif (splitY > r3b[1]) { var state = 1 //1\n\t\tnewA = -Math.atan2(splitY, xOnCircleGivenY(splitY, rad1));\n\t\tnewT = newA / quad;\n\t\tnq0 = midPoint(semiVerts[0], semiOuts[0], newT);\n\t\tnq1 = midPoint(semiOuts[0], semiIns[1], newT);\n\t\tnq2 = midPoint(semiIns[1], semiVerts[1], newT);\n\t\tnr0 = midPoint(nq0, nq1, newT);\n\t\tnr1 = midPoint(nq1, nq2, newT);\n\t\tns0 = midPoint(nr0, nr1, newT);\n\t\tt = (A - quad) / quad;\n\t\tq0 = midPoint(semiVerts[0], semiOuts[0], t);\n\t\tq1 = midPoint(semiOuts[0], semiIns[1], t);\n\t\tq2 = midPoint(semiIns[1], semiVerts[1], t);\n\t\tr0 = midPoint(q0, q1, t);\n\t\tr1 = midPoint(q1, q2, t);\n\t\ts0 = midPoint(r0, r1, t);\n\t\tv6 = pointAlongY(splitY, r3a, fy(s0));\n\t\tv4 = fx(v6);\n\t\tnewVerts = [semiVerts[0], semiVerts[0], semiVerts[1], semiVerts[2], fxy(ns0), [0, splitY], fy(ns0), fy(ns0)];\n\t\tnewIns = tangentsRelative(newVerts, [fy(nq0), semiVerts[0], semiIns[1], semiIns[2], fxy(nr0), [0, splitY], fy(ns0), fy(ns0)]);\n\t\tnewOuts = tangentsRelative(newVerts, [semiVerts[0], semiOuts[0], semiOuts[1], fxy(nq0), fxy(ns0), [0, splitY], fy(ns0), fy(nr0)]);\n\t} else { var state = 2 // 2\n\t\tt = (A - quad) / quad;\n\t\tq0 = midPoint(semiVerts[0], semiOuts[0], t);\n\t\tq1 = midPoint(semiOuts[0], semiIns[1], t);\n\t\tq2 = midPoint(semiIns[1], semiVerts[1], t);\n\t\tr0 = midPoint(q0, q1, t);\n\t\tr1 = midPoint(q1, q2, t);\n\t\ts0 = midPoint(r0, r1, t);\n\t\tv6 = pointAlongY(splitY, r3a, fy(s0));\n\t\tv4 = fx(v6);\n\t\tnewVerts = [semiVerts[0], semiVerts[1], semiVerts[2], fxy(s0), v4, [0, splitY], v6, fy(s0)];\n\t\tnewIns = tangentsRelative(newVerts, [fy(q0), semiIns[1], semiIns[2], fxy(r0), v4, [0, splitY], v6, fy(s0)]);\n\t\tnewOuts = tangentsRelative(newVerts, [semiOuts[0], semiOuts[1], fxy(q0), fxy(s0), v4, [0, splitY], v6, fy(r0)]);\n\t}\n} else { \n\tif (splitY < r3a[1]) { var state = 3 // 3\n\t\t\tvar UpsemiVerts = [\n\t\t\t[rad2, -dist],\n\t\t\t[0, -(dist - rad2)],\n\t\t\t[-rad2, -dist]\n\t\t];\n\t\tvar UpsemiIns = tangentsAbsolute(UpsemiVerts, [\n\t\t\t[0, 0],\n\t\t\t[(rad2 * semiFac), 0],\n\t\t\t[0, rad2 * semiFac]\n\t\t]);\n\t\tvar UpsemiOuts = tangentsAbsolute(UpsemiVerts, [\n\t\t\t[0, rad2 * semiFac],\n\t\t\t[-rad2 * semiFac, 0],\n\t\t\t[0, 0]\n\t\t]);\n\t\tt = (quad - A) / quad;\n\t\tq0 = midPoint(semiVerts[0], semiOuts[0], t);\n\t\tq1 = midPoint(semiOuts[0], semiIns[1], t);\n\t\tq2 = midPoint(semiIns[1], semiVerts[1], t);\n\t\tr0 = midPoint(q0, q1, t);\n\t\tr1 = midPoint(q1, q2, t);\n\t\ts0 = midPoint(r0, r1, t);\n\t\tif (rad2 == rad1) {var upA = 0.00001;} else {var upA = quad - Math.acos(clamp((rad2 - rad1) / dist, -1, 1));}\n\t\tvar upT = upA / quad;\n\t\tvar uq0 = midPoint(UpsemiVerts[0], UpsemiOuts[0], upT);\n\t\tuq1 = midPoint(UpsemiOuts[0], UpsemiIns[1], upT);\n\t\tuq2 = midPoint(UpsemiIns[1], UpsemiVerts[1], upT);\n\t\tur0 = midPoint(uq0, uq1, upT);\n\t\tur1 = midPoint(uq1, uq2, upT);\n\t\tus0 = midPoint(ur0, ur1, upT);\n\t\tnewA = -Math.atan2(-dist - splitY, xOnCircleGivenY(-dist - splitY, rad2));\n\t\tnewT = newA / upA;\n\t\tnq0 = midPoint(UpsemiVerts[0], uq0, newT);\n\t\tnq1 = midPoint(uq0, ur0, newT);\n\t\tnq2 = midPoint(ur0, us0, newT);\n\t\tnr0 = midPoint(nq0, nq1, newT);\n\t\tnr1 = midPoint(nq1, nq2, newT);\n\t\tns0 = midPoint(nr0, nr1, newT);\n\t\tnewVerts = [s0, semiVerts[1], fx(s0), fx(r3a), fx(ns0), [0, splitY], ns0, us0];\n\t\tnewIns = tangentsRelative(newVerts, [s0, q2, fx(r1), fx(r3a), fx(nr1), [0, splitY], ns0, us0]);\n\t\tnewOuts = tangentsRelative(newVerts, [r1, fx(q2), fx(r0), fx(nq2), fx(ns0), [0, splitY], nr1, r3a]);\n\t} else { var state = 4 // 4\n\t\tt = (quad - A) / quad;\n\t\tq0 = midPoint(semiVerts[0], semiOuts[0], t);\n\t\tq1 = midPoint(semiOuts[0], semiIns[1], t);\n\t\tq2 = midPoint(semiIns[1], semiVerts[1], t);\n\t\tr0 = midPoint(q0, q1, t);\n\t\tr1 = midPoint(q1, q2, t);\n\t\ts0 = midPoint(r0, r1, t);\n\t\tv6 = pointAlongY(splitY, r3a, s0);\n\t\tv4 = fx(v6);\n\t\tnewVerts = [s0, s0, semiVerts[1], fx(s0), v4, [0, splitY], v6, v6];\n\t\tnewIns = tangentsRelative(newVerts, [s0, s0, q2, fx(r1), v4, [0, splitY], v6, v6]);\n\t\tnewOuts = tangentsRelative(newVerts, [s0, r1, fx(q2), fx(r0), v4, [0, splitY], v6, r0]);\n\t}\n}\n// FLIP THE SHAPE IF IT'S DISTAL\nif (isProximal != true) {\n\tvar tempVerts = newVerts;\n\tvar tempIns = newIns;\n\tvar tempOuts = newOuts;\n\tnewVerts = flipArrayY(tempVerts, -dist * 0.5).reverse();\n\tnewIns = flipArrayY(tempOuts, 0).reverse();\n\tnewOuts = flipArrayY(tempIns, 0).reverse();\n}\n// APPLY ROUNDING\nif (pers != 0) {\n\tvar pVert = isProximal ? 5 : 2;\n\tnewVerts[pVert] += isProximal ? [0, newVerts[pVert + 1][0] * pers] : [0, -newVerts[pVert + 1][0] * pers];\n\tnewIns[pVert] = [-newVerts[pVert + 1][0] * semiFac, 0];\n\tnewOuts[pVert] = [newVerts[pVert + 1][0] * semiFac, 0];\n\tvar B = isProximal ? Math.PI / 2 - A : -(Math.PI / 2 + A);\n\tvar temp6 = [0, newVerts[pVert + 1][0] * semiFac * pers];\n\tnewIns[pVert + 1][0] = -temp6[1] * Math.sin(B);\n\tnewIns[pVert + 1][1] = temp6[1] * Math.cos(B);\n\tvar temp4 = [0, newVerts[pVert + 1][0] * semiFac * pers];\n\tnewOuts[pVert - 1][0] = -temp4[1] * Math.sin(-B);\n\tnewOuts[pVert - 1][1] = temp4[1] * Math.cos(-B);\n}\n// APPLY SQUARE END\t\nif (squareEndValue && !isUpper && !isProximal) {\n\tif (state === 1) {\n\t\tnewVerts[5] = [0, -dist];\n\t\tnewOuts[4] = [0, 0];\n\t\tnewIns[6] = [0, 0];\n\t}\n\tif (state === 2) {\n\t\tnewVerts[6] = [0, -dist];\n\t\tnewOuts[5] = [0, 0];\n\t\tnewIns[7] = [0, 0];\n\t}\n\tif (state === 3) {\n\t\tnewVerts[5] = [-distrad, -dist];\n\t\tnewVerts[6] = [0, -dist];\n\t\tnewVerts[7] = [distrad, -dist];\n\t\tnewOuts[5] = [0, 0];\n\t\tnewIns[7] = [0, 0];\n\t}\n\tif (state === 4) {\n\t\tnewVerts[4] = [-distrad, -dist];\n\t\tnewVerts[5] = [0, -dist];\n\t\tnewVerts[6] = [distrad, -dist];\n\t\tnewVerts[7] = [distrad, -dist];\n\t\tnewOuts[4] = [0, 0];\n\t\tnewIns[6] = [0, 0];\n\t}\n}\ncreatePath(newVerts, newIns, newOuts, true);",
-                                    "value": "{\"closed\":true,\"featherInterps\":[\n\n],\"featherRadii\":[\n\n],\"featherRelCornerAngles\":[\n\n],\"featherRelSegLocs\":[\n\n],\"featherSegLocs\":[\n\n],\"featherTensions\":[\n\n],\"featherTypes\":[\n\n],\"inTangents\":[[-17.6759490966797,-127.473754882812],[0,0],[0,0],[0,0],[-0.4837646484375,3.38233947753906],[-36.5245513916016,0],[-5.025146484375,-35.1349945068359],[0,0]],\"outTangents\":[[0,0],[0,0],[0,0],[0,0],[5.02513122558594,-35.1349945068359],[36.5245361328125,0],[0,0],[0,0]],\"vertices\":[[89.9256439208984,-79.5],[89.9256439208984,-79.5],[0,-79.5],[-89.9256439208984,-79.5],[-71.7659454345703,-210.356094360352],[0,-272.5],[71.7659454345703,-210.356094360352],[71.7659454345703,-210.356094360352]]}"
+                                    "value": "{\"closed\":true,\"featherInterps\":[\n\n],\"featherRadii\":[\n\n],\"featherRelCornerAngles\":[\n\n],\"featherRelSegLocs\":[\n\n],\"featherSegLocs\":[\n\n],\"featherTensions\":[\n\n],\"featherTypes\":[\n\n],\"inTangents\":[[-0.20939636230469,-3.24504089355469],[0,0],[0,0],[0,0],[-0.09141540527344,1.35476684570312],[-31.7591400146484,0],[-2.10707092285156,-31.2249145507812],[0,0]],\"outTangents\":[[0,0],[0,0],[0,0],[0,0],[2.10707092285156,-31.2249145507812],[31.7591400146484,0],[0,0],[0,0]],\"vertices\":[[60.1629486083984,-152.704803466797],[60.1629486083984,-152.704803466797],[0,-152.704803466797],[-60.1629486083984,-152.704803466797],[-59.8621368408203,-157.304595947266],[0,-213.204803466797],[59.8621368408203,-157.304595947266],[59.8621368408203,-157.304595947266]]}"
                                   }
                                 ],
                                 "enabled": true
@@ -60,7 +60,7 @@
                                     "type": "PROPERTY",
                                     "enabled": true,
                                     "expression": "thisComp.layer(\"{{ end }}\").effect(\"Limber\")(\"Middle Color\");",
-                                    "value": "[0.86666667461395,0.72549021244049,0.58823531866074,1]"
+                                    "value": "[0.17647058823529,0.54901960784314,0.92156862745098,1]"
                                   }
                                 ],
                                 "enabled": true
@@ -117,7 +117,7 @@
                                     "type": "PROPERTY",
                                     "enabled": true,
                                     "expression": "// Limber Taper\n// FUNCTIONS\nfunction midPoint(p1, p2, per) {\n\treturn [p1[0] + (p2[0] - p1[0]) * per, p1[1] + (p2[1] - p1[1]) * per];\n}\nfunction tangentsAbsolute(vertices, tans) {\n\tfor (var i = 0, il = vertices.length; i < il; i++) {\n\t\ttans[i] += vertices[i];\n\t}\n\treturn tans;\n}\nfunction tangentsRelative(vertices, tans) {\n\tfor (var i = 0, il = vertices.length; i < il; i++) {\n\t\ttans[i] -= vertices[i];\n\t}\n\treturn tans;\n}\nfunction fx(point) {\n\treturn [-point[0], point[1]];\n}\nfunction fy(point) {\n\treturn [point[0], -point[1]];\n}\nfunction fxy(point) {\n\treturn [-point[0], -point[1]];\n}\nfunction flipArrayY(vertices, flipPoint) {\n\tfor (var i = 0, il = vertices.length; i < il; i++) {\n\t\tvertices[i] = [vertices[i][0], flipPoint * 2 - vertices[i][1]];\n\t}\n\treturn vertices;\n}\nfunction pointAlongY(val, p1, p2) {\n\tvar linearValue = linear(val, p1[1], p2[1], p1[0], p2[0]);\n\treturn [linearValue, val];\n}\nfunction xOnCircleGivenY(x, r) {\n\treturn Math.sqrt((r * r) - (x * x));\n}\n// CONSTANTS\nvar semiFac = 0.5522847498307933; // factor for Bezier circles\nvar quad = (0.5 * Math.PI); // 90º\nvar groupName = thisProperty.propertyGroup(3).name;\nvar isUpper = groupName.split(\" \")[1] === \"Upper\";\nvar isProximal = groupName.split(\" \")[0] === \"Proximal\";\n// DOM ELEMENTS\nvar endctrl = thisComp.layer(\"{{ end }}\");\nvar lowerSplit = endctrl.effect(\"Limber\")(\"Lower Split\");\nvar lowerSplitValue = lowerSplit.value / 100;\nvar upperSplit = endctrl.effect(\"Limber\")(\"Upper Split\");\nvar upperSplitValue = upperSplit.value / 100;\nvar lowerRounding = endctrl.effect(\"Limber\")(\"Lower Rounding\");\nvar lowerRoundingValue = lowerRounding.value / 100;\nvar upperRounding = endctrl.effect(\"Limber\")(\"Upper Rounding\");\nvar upperRoundingValue = upperRounding.value / 100;\nvar squareEndValue = endctrl.effect(\"Limber\")(\"Square End\").value;\nvar sides = endctrl.content(\"Admin\").content(\"sides\").transform.position;\nif (isUpper) {var c2 = endctrl.content(\"Admin\").content(\"p2blend\").transform.scale; var c1 = endctrl.content(\"Admin\").content(\"p1\").transform.scale; var dist = sides[1]}\nelse {var c1 = endctrl.content(\"Admin\").content(\"p2blend\").transform.scale; var c2 = endctrl.content(\"Admin\").content(\"p3ik\").transform.scale;var dist = sides[0]}\n// DECLARE VARIABLES\nvar distrad = c2[0] * 0.5;\nvar proxrad = c1[0] * 0.5;\nvar pers = -lowerRoundingValue;\nvar splitY = isProximal ? lowerSplitValue : (1 - lowerSplitValue);\nif (isUpper) {\n\tpers = -upperRoundingValue;\n\tsplitY = isProximal ? upperSplitValue : (1 - upperSplitValue);\n}\nsplitY = -dist * splitY -0.5;\nvar rad1 = isProximal ? proxrad : distrad;\nvar rad2 = isProximal ? distrad : proxrad;\nvar A = Math.acos(clamp((rad2 - rad1) / dist, -1, 1));\nvar r3a = [(rad2 * Math.sin(A)), -(dist - rad2 * Math.cos(A))];\nvar r3b = [(rad1 * Math.sin(A)), (rad1 * Math.cos(A))];\nvar semiVerts = [\n\t[rad1, 0],\n\t[0, rad1],\n\t[-rad1, 0]\n];\nvar semiIns = tangentsAbsolute(semiVerts, [\n\t[0, 0],\n\t[(rad1 * semiFac), 0],\n\t[0, rad1 * semiFac]\n]);\nvar semiOuts = tangentsAbsolute(semiVerts, [\n\t[0, rad1 * semiFac],\n\t[-rad1 * semiFac, 0],\n\t[0, 0]\n]);\n// THE FOUR STATES\nif (rad2 < rad1) {\n\tif (splitY > r3b[1]) { var state = 1 //1\n\t\tnewA = -Math.atan2(splitY, xOnCircleGivenY(splitY, rad1));\n\t\tnewT = newA / quad;\n\t\tnq0 = midPoint(semiVerts[0], semiOuts[0], newT);\n\t\tnq1 = midPoint(semiOuts[0], semiIns[1], newT);\n\t\tnq2 = midPoint(semiIns[1], semiVerts[1], newT);\n\t\tnr0 = midPoint(nq0, nq1, newT);\n\t\tnr1 = midPoint(nq1, nq2, newT);\n\t\tns0 = midPoint(nr0, nr1, newT);\n\t\tt = (A - quad) / quad;\n\t\tq0 = midPoint(semiVerts[0], semiOuts[0], t);\n\t\tq1 = midPoint(semiOuts[0], semiIns[1], t);\n\t\tq2 = midPoint(semiIns[1], semiVerts[1], t);\n\t\tr0 = midPoint(q0, q1, t);\n\t\tr1 = midPoint(q1, q2, t);\n\t\ts0 = midPoint(r0, r1, t);\n\t\tv6 = pointAlongY(splitY, r3a, fy(s0));\n\t\tv4 = fx(v6);\n\t\tnewVerts = [semiVerts[0], semiVerts[0], semiVerts[1], semiVerts[2], fxy(ns0), [0, splitY], fy(ns0), fy(ns0)];\n\t\tnewIns = tangentsRelative(newVerts, [fy(nq0), semiVerts[0], semiIns[1], semiIns[2], fxy(nr0), [0, splitY], fy(ns0), fy(ns0)]);\n\t\tnewOuts = tangentsRelative(newVerts, [semiVerts[0], semiOuts[0], semiOuts[1], fxy(nq0), fxy(ns0), [0, splitY], fy(ns0), fy(nr0)]);\n\t} else { var state = 2 // 2\n\t\tt = (A - quad) / quad;\n\t\tq0 = midPoint(semiVerts[0], semiOuts[0], t);\n\t\tq1 = midPoint(semiOuts[0], semiIns[1], t);\n\t\tq2 = midPoint(semiIns[1], semiVerts[1], t);\n\t\tr0 = midPoint(q0, q1, t);\n\t\tr1 = midPoint(q1, q2, t);\n\t\ts0 = midPoint(r0, r1, t);\n\t\tv6 = pointAlongY(splitY, r3a, fy(s0));\n\t\tv4 = fx(v6);\n\t\tnewVerts = [semiVerts[0], semiVerts[1], semiVerts[2], fxy(s0), v4, [0, splitY], v6, fy(s0)];\n\t\tnewIns = tangentsRelative(newVerts, [fy(q0), semiIns[1], semiIns[2], fxy(r0), v4, [0, splitY], v6, fy(s0)]);\n\t\tnewOuts = tangentsRelative(newVerts, [semiOuts[0], semiOuts[1], fxy(q0), fxy(s0), v4, [0, splitY], v6, fy(r0)]);\n\t}\n} else { \n\tif (splitY < r3a[1]) { var state = 3 // 3\n\t\t\tvar UpsemiVerts = [\n\t\t\t[rad2, -dist],\n\t\t\t[0, -(dist - rad2)],\n\t\t\t[-rad2, -dist]\n\t\t];\n\t\tvar UpsemiIns = tangentsAbsolute(UpsemiVerts, [\n\t\t\t[0, 0],\n\t\t\t[(rad2 * semiFac), 0],\n\t\t\t[0, rad2 * semiFac]\n\t\t]);\n\t\tvar UpsemiOuts = tangentsAbsolute(UpsemiVerts, [\n\t\t\t[0, rad2 * semiFac],\n\t\t\t[-rad2 * semiFac, 0],\n\t\t\t[0, 0]\n\t\t]);\n\t\tt = (quad - A) / quad;\n\t\tq0 = midPoint(semiVerts[0], semiOuts[0], t);\n\t\tq1 = midPoint(semiOuts[0], semiIns[1], t);\n\t\tq2 = midPoint(semiIns[1], semiVerts[1], t);\n\t\tr0 = midPoint(q0, q1, t);\n\t\tr1 = midPoint(q1, q2, t);\n\t\ts0 = midPoint(r0, r1, t);\n\t\tif (rad2 == rad1) {var upA = 0.00001;} else {var upA = quad - Math.acos(clamp((rad2 - rad1) / dist, -1, 1));}\n\t\tvar upT = upA / quad;\n\t\tvar uq0 = midPoint(UpsemiVerts[0], UpsemiOuts[0], upT);\n\t\tuq1 = midPoint(UpsemiOuts[0], UpsemiIns[1], upT);\n\t\tuq2 = midPoint(UpsemiIns[1], UpsemiVerts[1], upT);\n\t\tur0 = midPoint(uq0, uq1, upT);\n\t\tur1 = midPoint(uq1, uq2, upT);\n\t\tus0 = midPoint(ur0, ur1, upT);\n\t\tnewA = -Math.atan2(-dist - splitY, xOnCircleGivenY(-dist - splitY, rad2));\n\t\tnewT = newA / upA;\n\t\tnq0 = midPoint(UpsemiVerts[0], uq0, newT);\n\t\tnq1 = midPoint(uq0, ur0, newT);\n\t\tnq2 = midPoint(ur0, us0, newT);\n\t\tnr0 = midPoint(nq0, nq1, newT);\n\t\tnr1 = midPoint(nq1, nq2, newT);\n\t\tns0 = midPoint(nr0, nr1, newT);\n\t\tnewVerts = [s0, semiVerts[1], fx(s0), fx(r3a), fx(ns0), [0, splitY], ns0, us0];\n\t\tnewIns = tangentsRelative(newVerts, [s0, q2, fx(r1), fx(r3a), fx(nr1), [0, splitY], ns0, us0]);\n\t\tnewOuts = tangentsRelative(newVerts, [r1, fx(q2), fx(r0), fx(nq2), fx(ns0), [0, splitY], nr1, r3a]);\n\t} else { var state = 4 // 4\n\t\tt = (quad - A) / quad;\n\t\tq0 = midPoint(semiVerts[0], semiOuts[0], t);\n\t\tq1 = midPoint(semiOuts[0], semiIns[1], t);\n\t\tq2 = midPoint(semiIns[1], semiVerts[1], t);\n\t\tr0 = midPoint(q0, q1, t);\n\t\tr1 = midPoint(q1, q2, t);\n\t\ts0 = midPoint(r0, r1, t);\n\t\tv6 = pointAlongY(splitY, r3a, s0);\n\t\tv4 = fx(v6);\n\t\tnewVerts = [s0, s0, semiVerts[1], fx(s0), v4, [0, splitY], v6, v6];\n\t\tnewIns = tangentsRelative(newVerts, [s0, s0, q2, fx(r1), v4, [0, splitY], v6, v6]);\n\t\tnewOuts = tangentsRelative(newVerts, [s0, r1, fx(q2), fx(r0), v4, [0, splitY], v6, r0]);\n\t}\n}\n// FLIP THE SHAPE IF IT'S DISTAL\nif (isProximal != true) {\n\tvar tempVerts = newVerts;\n\tvar tempIns = newIns;\n\tvar tempOuts = newOuts;\n\tnewVerts = flipArrayY(tempVerts, -dist * 0.5).reverse();\n\tnewIns = flipArrayY(tempOuts, 0).reverse();\n\tnewOuts = flipArrayY(tempIns, 0).reverse();\n}\n// APPLY ROUNDING\nif (pers != 0) {\n\tvar pVert = isProximal ? 5 : 2;\n\tnewVerts[pVert] += isProximal ? [0, newVerts[pVert + 1][0] * pers] : [0, -newVerts[pVert + 1][0] * pers];\n\tnewIns[pVert] = [-newVerts[pVert + 1][0] * semiFac, 0];\n\tnewOuts[pVert] = [newVerts[pVert + 1][0] * semiFac, 0];\n\tvar B = isProximal ? Math.PI / 2 - A : -(Math.PI / 2 + A);\n\tvar temp6 = [0, newVerts[pVert + 1][0] * semiFac * pers];\n\tnewIns[pVert + 1][0] = -temp6[1] * Math.sin(B);\n\tnewIns[pVert + 1][1] = temp6[1] * Math.cos(B);\n\tvar temp4 = [0, newVerts[pVert + 1][0] * semiFac * pers];\n\tnewOuts[pVert - 1][0] = -temp4[1] * Math.sin(-B);\n\tnewOuts[pVert - 1][1] = temp4[1] * Math.cos(-B);\n}\n// APPLY SQUARE END\t\nif (squareEndValue && !isUpper && !isProximal) {\n\tif (state === 1) {\n\t\tnewVerts[5] = [0, -dist];\n\t\tnewOuts[4] = [0, 0];\n\t\tnewIns[6] = [0, 0];\n\t}\n\tif (state === 2) {\n\t\tnewVerts[6] = [0, -dist];\n\t\tnewOuts[5] = [0, 0];\n\t\tnewIns[7] = [0, 0];\n\t}\n\tif (state === 3) {\n\t\tnewVerts[5] = [-distrad, -dist];\n\t\tnewVerts[6] = [0, -dist];\n\t\tnewVerts[7] = [distrad, -dist];\n\t\tnewOuts[5] = [0, 0];\n\t\tnewIns[7] = [0, 0];\n\t}\n\tif (state === 4) {\n\t\tnewVerts[4] = [-distrad, -dist];\n\t\tnewVerts[5] = [0, -dist];\n\t\tnewVerts[6] = [distrad, -dist];\n\t\tnewVerts[7] = [distrad, -dist];\n\t\tnewOuts[4] = [0, 0];\n\t\tnewIns[6] = [0, 0];\n\t}\n}\ncreatePath(newVerts, newIns, newOuts, true);",
-                                    "value": "{\"closed\":true,\"featherInterps\":[\n\n],\"featherRadii\":[\n\n],\"featherRelCornerAngles\":[\n\n],\"featherRelSegLocs\":[\n\n],\"featherSegLocs\":[\n\n],\"featherTensions\":[\n\n],\"featherTypes\":[\n\n],\"inTangents\":[[0,-4.84980773925781],[55.2284698486328,0],[0,55.2284698486328],[-0.66725158691406,4.66529846191406],[0,0],[0,0],[0,0],[0,0]],\"outTangents\":[[0,55.2284698486328],[-55.2284698486328,0],[0,-4.84980773925781],[0,0],[0,0],[0,0],[0,0],[0.667236328125,4.66529846191406]],\"vertices\":[[100,0],[0,100],[-100,0],[-98.9875183105469,-14.2842712402344],[-89.7916564941406,-80.5],[0,-80.5],[89.7916564941406,-80.5],[98.9875183105469,-14.2842712402344]]}"
+                                    "value": "{\"closed\":true,\"featherInterps\":[\n\n],\"featherRadii\":[\n\n],\"featherRelCornerAngles\":[\n\n],\"featherRelSegLocs\":[\n\n],\"featherSegLocs\":[\n\n],\"featherTensions\":[\n\n],\"featherTypes\":[\n\n],\"inTangents\":[[0,-1.60760498046875],[38.6599273681641,0],[0,38.6599273681641],[-0.10665893554688,1.58055114746094],[0,0],[0,0],[0,0],[0,0]],\"outTangents\":[[0,38.6599273681641],[-38.6599273681641,0],[0,-1.60760498046875],[0,0],[0,0],[0,0],[0,0],[0.10665893554688,1.58055114746094]],\"vertices\":[[70,0],[0,70],[-70,0],[-69.8391571044922,-4.78309631347656],[-60.0955810546875,-153.704803466797],[0,-153.704803466797],[60.0955810546875,-153.704803466797],[69.8391418457031,-4.78309631347656]]}"
                                   }
                                 ],
                                 "enabled": true
@@ -176,7 +176,7 @@
                         "type": "PROPERTY",
                         "enabled": true,
                         "expression": "thisComp.layer(\"{{ end }}\").content(\"Admin\").content(\"p1\").transform.position",
-                        "value": "[300,150]"
+                        "value": "[285,169.5]"
                       },
                       {
                         "matchName": "ADBE Vector Rotation",
@@ -184,7 +184,7 @@
                         "type": "PROPERTY",
                         "enabled": true,
                         "expression": "thisComp.layer(\"{{ end }}\").content(\"Admin\").content(\"angles\").transform.anchorPoint[0]",
-                        "value": "138.590377890729"
+                        "value": "151.520115553059"
                       }
                     ],
                     "enabled": true
@@ -232,7 +232,7 @@
                                     "type": "PROPERTY",
                                     "enabled": true,
                                     "expression": "// Limber Taper\n// FUNCTIONS\nfunction midPoint(p1, p2, per) {\n\treturn [p1[0] + (p2[0] - p1[0]) * per, p1[1] + (p2[1] - p1[1]) * per];\n}\nfunction tangentsAbsolute(vertices, tans) {\n\tfor (var i = 0, il = vertices.length; i < il; i++) {\n\t\ttans[i] += vertices[i];\n\t}\n\treturn tans;\n}\nfunction tangentsRelative(vertices, tans) {\n\tfor (var i = 0, il = vertices.length; i < il; i++) {\n\t\ttans[i] -= vertices[i];\n\t}\n\treturn tans;\n}\nfunction fx(point) {\n\treturn [-point[0], point[1]];\n}\nfunction fy(point) {\n\treturn [point[0], -point[1]];\n}\nfunction fxy(point) {\n\treturn [-point[0], -point[1]];\n}\nfunction flipArrayY(vertices, flipPoint) {\n\tfor (var i = 0, il = vertices.length; i < il; i++) {\n\t\tvertices[i] = [vertices[i][0], flipPoint * 2 - vertices[i][1]];\n\t}\n\treturn vertices;\n}\nfunction pointAlongY(val, p1, p2) {\n\tvar linearValue = linear(val, p1[1], p2[1], p1[0], p2[0]);\n\treturn [linearValue, val];\n}\nfunction xOnCircleGivenY(x, r) {\n\treturn Math.sqrt((r * r) - (x * x));\n}\n// CONSTANTS\nvar semiFac = 0.5522847498307933; // factor for Bezier circles\nvar quad = (0.5 * Math.PI); // 90º\nvar groupName = thisProperty.propertyGroup(3).name;\nvar isUpper = groupName.split(\" \")[1] === \"Upper\";\nvar isProximal = groupName.split(\" \")[0] === \"Proximal\";\n// DOM ELEMENTS\nvar endctrl = thisComp.layer(\"{{ end }}\");\nvar lowerSplit = endctrl.effect(\"Limber\")(\"Lower Split\");\nvar lowerSplitValue = lowerSplit.value / 100;\nvar upperSplit = endctrl.effect(\"Limber\")(\"Upper Split\");\nvar upperSplitValue = upperSplit.value / 100;\nvar lowerRounding = endctrl.effect(\"Limber\")(\"Lower Rounding\");\nvar lowerRoundingValue = lowerRounding.value / 100;\nvar upperRounding = endctrl.effect(\"Limber\")(\"Upper Rounding\");\nvar upperRoundingValue = upperRounding.value / 100;\nvar squareEndValue = endctrl.effect(\"Limber\")(\"Square End\").value;\nvar sides = endctrl.content(\"Admin\").content(\"sides\").transform.position;\nif (isUpper) {var c2 = endctrl.content(\"Admin\").content(\"p2blend\").transform.scale; var c1 = endctrl.content(\"Admin\").content(\"p1\").transform.scale; var dist = sides[1]}\nelse {var c1 = endctrl.content(\"Admin\").content(\"p2blend\").transform.scale; var c2 = endctrl.content(\"Admin\").content(\"p3ik\").transform.scale;var dist = sides[0]}\n// DECLARE VARIABLES\nvar distrad = c2[0] * 0.5;\nvar proxrad = c1[0] * 0.5;\nvar pers = -lowerRoundingValue;\nvar splitY = isProximal ? lowerSplitValue : (1 - lowerSplitValue);\nif (isUpper) {\n\tpers = -upperRoundingValue;\n\tsplitY = isProximal ? upperSplitValue : (1 - upperSplitValue);\n}\nsplitY = -dist * splitY -0.5;\nvar rad1 = isProximal ? proxrad : distrad;\nvar rad2 = isProximal ? distrad : proxrad;\nvar A = Math.acos(clamp((rad2 - rad1) / dist, -1, 1));\nvar r3a = [(rad2 * Math.sin(A)), -(dist - rad2 * Math.cos(A))];\nvar r3b = [(rad1 * Math.sin(A)), (rad1 * Math.cos(A))];\nvar semiVerts = [\n\t[rad1, 0],\n\t[0, rad1],\n\t[-rad1, 0]\n];\nvar semiIns = tangentsAbsolute(semiVerts, [\n\t[0, 0],\n\t[(rad1 * semiFac), 0],\n\t[0, rad1 * semiFac]\n]);\nvar semiOuts = tangentsAbsolute(semiVerts, [\n\t[0, rad1 * semiFac],\n\t[-rad1 * semiFac, 0],\n\t[0, 0]\n]);\n// THE FOUR STATES\nif (rad2 < rad1) {\n\tif (splitY > r3b[1]) { var state = 1 //1\n\t\tnewA = -Math.atan2(splitY, xOnCircleGivenY(splitY, rad1));\n\t\tnewT = newA / quad;\n\t\tnq0 = midPoint(semiVerts[0], semiOuts[0], newT);\n\t\tnq1 = midPoint(semiOuts[0], semiIns[1], newT);\n\t\tnq2 = midPoint(semiIns[1], semiVerts[1], newT);\n\t\tnr0 = midPoint(nq0, nq1, newT);\n\t\tnr1 = midPoint(nq1, nq2, newT);\n\t\tns0 = midPoint(nr0, nr1, newT);\n\t\tt = (A - quad) / quad;\n\t\tq0 = midPoint(semiVerts[0], semiOuts[0], t);\n\t\tq1 = midPoint(semiOuts[0], semiIns[1], t);\n\t\tq2 = midPoint(semiIns[1], semiVerts[1], t);\n\t\tr0 = midPoint(q0, q1, t);\n\t\tr1 = midPoint(q1, q2, t);\n\t\ts0 = midPoint(r0, r1, t);\n\t\tv6 = pointAlongY(splitY, r3a, fy(s0));\n\t\tv4 = fx(v6);\n\t\tnewVerts = [semiVerts[0], semiVerts[0], semiVerts[1], semiVerts[2], fxy(ns0), [0, splitY], fy(ns0), fy(ns0)];\n\t\tnewIns = tangentsRelative(newVerts, [fy(nq0), semiVerts[0], semiIns[1], semiIns[2], fxy(nr0), [0, splitY], fy(ns0), fy(ns0)]);\n\t\tnewOuts = tangentsRelative(newVerts, [semiVerts[0], semiOuts[0], semiOuts[1], fxy(nq0), fxy(ns0), [0, splitY], fy(ns0), fy(nr0)]);\n\t} else { var state = 2 // 2\n\t\tt = (A - quad) / quad;\n\t\tq0 = midPoint(semiVerts[0], semiOuts[0], t);\n\t\tq1 = midPoint(semiOuts[0], semiIns[1], t);\n\t\tq2 = midPoint(semiIns[1], semiVerts[1], t);\n\t\tr0 = midPoint(q0, q1, t);\n\t\tr1 = midPoint(q1, q2, t);\n\t\ts0 = midPoint(r0, r1, t);\n\t\tv6 = pointAlongY(splitY, r3a, fy(s0));\n\t\tv4 = fx(v6);\n\t\tnewVerts = [semiVerts[0], semiVerts[1], semiVerts[2], fxy(s0), v4, [0, splitY], v6, fy(s0)];\n\t\tnewIns = tangentsRelative(newVerts, [fy(q0), semiIns[1], semiIns[2], fxy(r0), v4, [0, splitY], v6, fy(s0)]);\n\t\tnewOuts = tangentsRelative(newVerts, [semiOuts[0], semiOuts[1], fxy(q0), fxy(s0), v4, [0, splitY], v6, fy(r0)]);\n\t}\n} else { \n\tif (splitY < r3a[1]) { var state = 3 // 3\n\t\t\tvar UpsemiVerts = [\n\t\t\t[rad2, -dist],\n\t\t\t[0, -(dist - rad2)],\n\t\t\t[-rad2, -dist]\n\t\t];\n\t\tvar UpsemiIns = tangentsAbsolute(UpsemiVerts, [\n\t\t\t[0, 0],\n\t\t\t[(rad2 * semiFac), 0],\n\t\t\t[0, rad2 * semiFac]\n\t\t]);\n\t\tvar UpsemiOuts = tangentsAbsolute(UpsemiVerts, [\n\t\t\t[0, rad2 * semiFac],\n\t\t\t[-rad2 * semiFac, 0],\n\t\t\t[0, 0]\n\t\t]);\n\t\tt = (quad - A) / quad;\n\t\tq0 = midPoint(semiVerts[0], semiOuts[0], t);\n\t\tq1 = midPoint(semiOuts[0], semiIns[1], t);\n\t\tq2 = midPoint(semiIns[1], semiVerts[1], t);\n\t\tr0 = midPoint(q0, q1, t);\n\t\tr1 = midPoint(q1, q2, t);\n\t\ts0 = midPoint(r0, r1, t);\n\t\tif (rad2 == rad1) {var upA = 0.00001;} else {var upA = quad - Math.acos(clamp((rad2 - rad1) / dist, -1, 1));}\n\t\tvar upT = upA / quad;\n\t\tvar uq0 = midPoint(UpsemiVerts[0], UpsemiOuts[0], upT);\n\t\tuq1 = midPoint(UpsemiOuts[0], UpsemiIns[1], upT);\n\t\tuq2 = midPoint(UpsemiIns[1], UpsemiVerts[1], upT);\n\t\tur0 = midPoint(uq0, uq1, upT);\n\t\tur1 = midPoint(uq1, uq2, upT);\n\t\tus0 = midPoint(ur0, ur1, upT);\n\t\tnewA = -Math.atan2(-dist - splitY, xOnCircleGivenY(-dist - splitY, rad2));\n\t\tnewT = newA / upA;\n\t\tnq0 = midPoint(UpsemiVerts[0], uq0, newT);\n\t\tnq1 = midPoint(uq0, ur0, newT);\n\t\tnq2 = midPoint(ur0, us0, newT);\n\t\tnr0 = midPoint(nq0, nq1, newT);\n\t\tnr1 = midPoint(nq1, nq2, newT);\n\t\tns0 = midPoint(nr0, nr1, newT);\n\t\tnewVerts = [s0, semiVerts[1], fx(s0), fx(r3a), fx(ns0), [0, splitY], ns0, us0];\n\t\tnewIns = tangentsRelative(newVerts, [s0, q2, fx(r1), fx(r3a), fx(nr1), [0, splitY], ns0, us0]);\n\t\tnewOuts = tangentsRelative(newVerts, [r1, fx(q2), fx(r0), fx(nq2), fx(ns0), [0, splitY], nr1, r3a]);\n\t} else { var state = 4 // 4\n\t\tt = (quad - A) / quad;\n\t\tq0 = midPoint(semiVerts[0], semiOuts[0], t);\n\t\tq1 = midPoint(semiOuts[0], semiIns[1], t);\n\t\tq2 = midPoint(semiIns[1], semiVerts[1], t);\n\t\tr0 = midPoint(q0, q1, t);\n\t\tr1 = midPoint(q1, q2, t);\n\t\ts0 = midPoint(r0, r1, t);\n\t\tv6 = pointAlongY(splitY, r3a, s0);\n\t\tv4 = fx(v6);\n\t\tnewVerts = [s0, s0, semiVerts[1], fx(s0), v4, [0, splitY], v6, v6];\n\t\tnewIns = tangentsRelative(newVerts, [s0, s0, q2, fx(r1), v4, [0, splitY], v6, v6]);\n\t\tnewOuts = tangentsRelative(newVerts, [s0, r1, fx(q2), fx(r0), v4, [0, splitY], v6, r0]);\n\t}\n}\n// FLIP THE SHAPE IF IT'S DISTAL\nif (isProximal != true) {\n\tvar tempVerts = newVerts;\n\tvar tempIns = newIns;\n\tvar tempOuts = newOuts;\n\tnewVerts = flipArrayY(tempVerts, -dist * 0.5).reverse();\n\tnewIns = flipArrayY(tempOuts, 0).reverse();\n\tnewOuts = flipArrayY(tempIns, 0).reverse();\n}\n// APPLY ROUNDING\nif (pers != 0) {\n\tvar pVert = isProximal ? 5 : 2;\n\tnewVerts[pVert] += isProximal ? [0, newVerts[pVert + 1][0] * pers] : [0, -newVerts[pVert + 1][0] * pers];\n\tnewIns[pVert] = [-newVerts[pVert + 1][0] * semiFac, 0];\n\tnewOuts[pVert] = [newVerts[pVert + 1][0] * semiFac, 0];\n\tvar B = isProximal ? Math.PI / 2 - A : -(Math.PI / 2 + A);\n\tvar temp6 = [0, newVerts[pVert + 1][0] * semiFac * pers];\n\tnewIns[pVert + 1][0] = -temp6[1] * Math.sin(B);\n\tnewIns[pVert + 1][1] = temp6[1] * Math.cos(B);\n\tvar temp4 = [0, newVerts[pVert + 1][0] * semiFac * pers];\n\tnewOuts[pVert - 1][0] = -temp4[1] * Math.sin(-B);\n\tnewOuts[pVert - 1][1] = temp4[1] * Math.cos(-B);\n}\n// APPLY SQUARE END\t\nif (squareEndValue && !isUpper && !isProximal) {\n\tif (state === 1) {\n\t\tnewVerts[5] = [0, -dist];\n\t\tnewOuts[4] = [0, 0];\n\t\tnewIns[6] = [0, 0];\n\t}\n\tif (state === 2) {\n\t\tnewVerts[6] = [0, -dist];\n\t\tnewOuts[5] = [0, 0];\n\t\tnewIns[7] = [0, 0];\n\t}\n\tif (state === 3) {\n\t\tnewVerts[5] = [-distrad, -dist];\n\t\tnewVerts[6] = [0, -dist];\n\t\tnewVerts[7] = [distrad, -dist];\n\t\tnewOuts[5] = [0, 0];\n\t\tnewIns[7] = [0, 0];\n\t}\n\tif (state === 4) {\n\t\tnewVerts[4] = [-distrad, -dist];\n\t\tnewVerts[5] = [0, -dist];\n\t\tnewVerts[6] = [distrad, -dist];\n\t\tnewVerts[7] = [distrad, -dist];\n\t\tnewOuts[4] = [0, 0];\n\t\tnewIns[6] = [0, 0];\n\t}\n}\ncreatePath(newVerts, newIns, newOuts, true);",
-                                    "value": "{\"closed\":true,\"featherInterps\":[\n\n],\"featherRadii\":[\n\n],\"featherRelCornerAngles\":[\n\n],\"featherRelSegLocs\":[\n\n],\"featherSegLocs\":[\n\n],\"featherTensions\":[\n\n],\"featherTypes\":[\n\n],\"inTangents\":[[0,-2.873779296875],[40.0406494140625,0],[0,40.0406494140625],[-0.32521057128906,2.78648376464844],[0,0],[0,0],[0,0],[0,0]],\"outTangents\":[[0,40.0406494140625],[-40.0406494140625,0],[0,-2.873779296875],[0,0],[0,0],[0,0],[0,0],[0.32521057128906,2.78648376464844]],\"vertices\":[[72.5,0],[0,72.5],[-72.5,0],[-72.0075836181641,-8.4949951171875],[-57.0579986572266,-140.5],[0,-140.5],[57.0579986572266,-140.5],[72.0075836181641,-8.4949951171875]]}"
+                                    "value": "{\"closed\":true,\"featherInterps\":[\n\n],\"featherRadii\":[\n\n],\"featherRelCornerAngles\":[\n\n],\"featherRelSegLocs\":[\n\n],\"featherSegLocs\":[\n\n],\"featherTensions\":[\n\n],\"featherTypes\":[\n\n],\"inTangents\":[[0,-0.68861389160156],[33.1370849609375,0],[0,33.1370849609375],[-0.02301025390625,0.68299865722656],[0,0],[0,0],[0,0],[0,0]],\"outTangents\":[[0,33.1370849609375],[-33.1370849609375,0],[0,-0.68861389160156],[0,0],[0,0],[0,0],[0,0],[0.02301025390625,0.68299865722656]],\"vertices\":[[60,0],[0,60],[-60,0],[-59.9653930664062,-2.0574951171875],[-56.5139770507812,-107.743362426758],[0,-107.743362426758],[56.5139770507812,-107.743362426758],[59.9653930664062,-2.0574951171875]]}"
                                   }
                                 ],
                                 "enabled": true
@@ -248,7 +248,7 @@
                                     "type": "PROPERTY",
                                     "enabled": true,
                                     "expression": "thisComp.layer(\"{{ end }}\").effect(\"Limber\")(\"Middle Color\");",
-                                    "value": "[0.86666667461395,0.72549021244049,0.58823531866074,1]"
+                                    "value": "[0.17647058823529,0.54901960784314,0.92156862745098,1]"
                                   }
                                 ],
                                 "enabled": true
@@ -305,7 +305,7 @@
                                     "type": "PROPERTY",
                                     "enabled": true,
                                     "expression": "// Limber Taper\n// FUNCTIONS\nfunction midPoint(p1, p2, per) {\n\treturn [p1[0] + (p2[0] - p1[0]) * per, p1[1] + (p2[1] - p1[1]) * per];\n}\nfunction tangentsAbsolute(vertices, tans) {\n\tfor (var i = 0, il = vertices.length; i < il; i++) {\n\t\ttans[i] += vertices[i];\n\t}\n\treturn tans;\n}\nfunction tangentsRelative(vertices, tans) {\n\tfor (var i = 0, il = vertices.length; i < il; i++) {\n\t\ttans[i] -= vertices[i];\n\t}\n\treturn tans;\n}\nfunction fx(point) {\n\treturn [-point[0], point[1]];\n}\nfunction fy(point) {\n\treturn [point[0], -point[1]];\n}\nfunction fxy(point) {\n\treturn [-point[0], -point[1]];\n}\nfunction flipArrayY(vertices, flipPoint) {\n\tfor (var i = 0, il = vertices.length; i < il; i++) {\n\t\tvertices[i] = [vertices[i][0], flipPoint * 2 - vertices[i][1]];\n\t}\n\treturn vertices;\n}\nfunction pointAlongY(val, p1, p2) {\n\tvar linearValue = linear(val, p1[1], p2[1], p1[0], p2[0]);\n\treturn [linearValue, val];\n}\nfunction xOnCircleGivenY(x, r) {\n\treturn Math.sqrt((r * r) - (x * x));\n}\n// CONSTANTS\nvar semiFac = 0.5522847498307933; // factor for Bezier circles\nvar quad = (0.5 * Math.PI); // 90º\nvar groupName = thisProperty.propertyGroup(3).name;\nvar isUpper = groupName.split(\" \")[1] === \"Upper\";\nvar isProximal = groupName.split(\" \")[0] === \"Proximal\";\n// DOM ELEMENTS\nvar endctrl = thisComp.layer(\"{{ end }}\");\nvar lowerSplit = endctrl.effect(\"Limber\")(\"Lower Split\");\nvar lowerSplitValue = lowerSplit.value / 100;\nvar upperSplit = endctrl.effect(\"Limber\")(\"Upper Split\");\nvar upperSplitValue = upperSplit.value / 100;\nvar lowerRounding = endctrl.effect(\"Limber\")(\"Lower Rounding\");\nvar lowerRoundingValue = lowerRounding.value / 100;\nvar upperRounding = endctrl.effect(\"Limber\")(\"Upper Rounding\");\nvar upperRoundingValue = upperRounding.value / 100;\nvar squareEndValue = endctrl.effect(\"Limber\")(\"Square End\").value;\nvar sides = endctrl.content(\"Admin\").content(\"sides\").transform.position;\nif (isUpper) {var c2 = endctrl.content(\"Admin\").content(\"p2blend\").transform.scale; var c1 = endctrl.content(\"Admin\").content(\"p1\").transform.scale; var dist = sides[1]}\nelse {var c1 = endctrl.content(\"Admin\").content(\"p2blend\").transform.scale; var c2 = endctrl.content(\"Admin\").content(\"p3ik\").transform.scale;var dist = sides[0]}\n// DECLARE VARIABLES\nvar distrad = c2[0] * 0.5;\nvar proxrad = c1[0] * 0.5;\nvar pers = -lowerRoundingValue;\nvar splitY = isProximal ? lowerSplitValue : (1 - lowerSplitValue);\nif (isUpper) {\n\tpers = -upperRoundingValue;\n\tsplitY = isProximal ? upperSplitValue : (1 - upperSplitValue);\n}\nsplitY = -dist * splitY -0.5;\nvar rad1 = isProximal ? proxrad : distrad;\nvar rad2 = isProximal ? distrad : proxrad;\nvar A = Math.acos(clamp((rad2 - rad1) / dist, -1, 1));\nvar r3a = [(rad2 * Math.sin(A)), -(dist - rad2 * Math.cos(A))];\nvar r3b = [(rad1 * Math.sin(A)), (rad1 * Math.cos(A))];\nvar semiVerts = [\n\t[rad1, 0],\n\t[0, rad1],\n\t[-rad1, 0]\n];\nvar semiIns = tangentsAbsolute(semiVerts, [\n\t[0, 0],\n\t[(rad1 * semiFac), 0],\n\t[0, rad1 * semiFac]\n]);\nvar semiOuts = tangentsAbsolute(semiVerts, [\n\t[0, rad1 * semiFac],\n\t[-rad1 * semiFac, 0],\n\t[0, 0]\n]);\n// THE FOUR STATES\nif (rad2 < rad1) {\n\tif (splitY > r3b[1]) { var state = 1 //1\n\t\tnewA = -Math.atan2(splitY, xOnCircleGivenY(splitY, rad1));\n\t\tnewT = newA / quad;\n\t\tnq0 = midPoint(semiVerts[0], semiOuts[0], newT);\n\t\tnq1 = midPoint(semiOuts[0], semiIns[1], newT);\n\t\tnq2 = midPoint(semiIns[1], semiVerts[1], newT);\n\t\tnr0 = midPoint(nq0, nq1, newT);\n\t\tnr1 = midPoint(nq1, nq2, newT);\n\t\tns0 = midPoint(nr0, nr1, newT);\n\t\tt = (A - quad) / quad;\n\t\tq0 = midPoint(semiVerts[0], semiOuts[0], t);\n\t\tq1 = midPoint(semiOuts[0], semiIns[1], t);\n\t\tq2 = midPoint(semiIns[1], semiVerts[1], t);\n\t\tr0 = midPoint(q0, q1, t);\n\t\tr1 = midPoint(q1, q2, t);\n\t\ts0 = midPoint(r0, r1, t);\n\t\tv6 = pointAlongY(splitY, r3a, fy(s0));\n\t\tv4 = fx(v6);\n\t\tnewVerts = [semiVerts[0], semiVerts[0], semiVerts[1], semiVerts[2], fxy(ns0), [0, splitY], fy(ns0), fy(ns0)];\n\t\tnewIns = tangentsRelative(newVerts, [fy(nq0), semiVerts[0], semiIns[1], semiIns[2], fxy(nr0), [0, splitY], fy(ns0), fy(ns0)]);\n\t\tnewOuts = tangentsRelative(newVerts, [semiVerts[0], semiOuts[0], semiOuts[1], fxy(nq0), fxy(ns0), [0, splitY], fy(ns0), fy(nr0)]);\n\t} else { var state = 2 // 2\n\t\tt = (A - quad) / quad;\n\t\tq0 = midPoint(semiVerts[0], semiOuts[0], t);\n\t\tq1 = midPoint(semiOuts[0], semiIns[1], t);\n\t\tq2 = midPoint(semiIns[1], semiVerts[1], t);\n\t\tr0 = midPoint(q0, q1, t);\n\t\tr1 = midPoint(q1, q2, t);\n\t\ts0 = midPoint(r0, r1, t);\n\t\tv6 = pointAlongY(splitY, r3a, fy(s0));\n\t\tv4 = fx(v6);\n\t\tnewVerts = [semiVerts[0], semiVerts[1], semiVerts[2], fxy(s0), v4, [0, splitY], v6, fy(s0)];\n\t\tnewIns = tangentsRelative(newVerts, [fy(q0), semiIns[1], semiIns[2], fxy(r0), v4, [0, splitY], v6, fy(s0)]);\n\t\tnewOuts = tangentsRelative(newVerts, [semiOuts[0], semiOuts[1], fxy(q0), fxy(s0), v4, [0, splitY], v6, fy(r0)]);\n\t}\n} else { \n\tif (splitY < r3a[1]) { var state = 3 // 3\n\t\t\tvar UpsemiVerts = [\n\t\t\t[rad2, -dist],\n\t\t\t[0, -(dist - rad2)],\n\t\t\t[-rad2, -dist]\n\t\t];\n\t\tvar UpsemiIns = tangentsAbsolute(UpsemiVerts, [\n\t\t\t[0, 0],\n\t\t\t[(rad2 * semiFac), 0],\n\t\t\t[0, rad2 * semiFac]\n\t\t]);\n\t\tvar UpsemiOuts = tangentsAbsolute(UpsemiVerts, [\n\t\t\t[0, rad2 * semiFac],\n\t\t\t[-rad2 * semiFac, 0],\n\t\t\t[0, 0]\n\t\t]);\n\t\tt = (quad - A) / quad;\n\t\tq0 = midPoint(semiVerts[0], semiOuts[0], t);\n\t\tq1 = midPoint(semiOuts[0], semiIns[1], t);\n\t\tq2 = midPoint(semiIns[1], semiVerts[1], t);\n\t\tr0 = midPoint(q0, q1, t);\n\t\tr1 = midPoint(q1, q2, t);\n\t\ts0 = midPoint(r0, r1, t);\n\t\tif (rad2 == rad1) {var upA = 0.00001;} else {var upA = quad - Math.acos(clamp((rad2 - rad1) / dist, -1, 1));}\n\t\tvar upT = upA / quad;\n\t\tvar uq0 = midPoint(UpsemiVerts[0], UpsemiOuts[0], upT);\n\t\tuq1 = midPoint(UpsemiOuts[0], UpsemiIns[1], upT);\n\t\tuq2 = midPoint(UpsemiIns[1], UpsemiVerts[1], upT);\n\t\tur0 = midPoint(uq0, uq1, upT);\n\t\tur1 = midPoint(uq1, uq2, upT);\n\t\tus0 = midPoint(ur0, ur1, upT);\n\t\tnewA = -Math.atan2(-dist - splitY, xOnCircleGivenY(-dist - splitY, rad2));\n\t\tnewT = newA / upA;\n\t\tnq0 = midPoint(UpsemiVerts[0], uq0, newT);\n\t\tnq1 = midPoint(uq0, ur0, newT);\n\t\tnq2 = midPoint(ur0, us0, newT);\n\t\tnr0 = midPoint(nq0, nq1, newT);\n\t\tnr1 = midPoint(nq1, nq2, newT);\n\t\tns0 = midPoint(nr0, nr1, newT);\n\t\tnewVerts = [s0, semiVerts[1], fx(s0), fx(r3a), fx(ns0), [0, splitY], ns0, us0];\n\t\tnewIns = tangentsRelative(newVerts, [s0, q2, fx(r1), fx(r3a), fx(nr1), [0, splitY], ns0, us0]);\n\t\tnewOuts = tangentsRelative(newVerts, [r1, fx(q2), fx(r0), fx(nq2), fx(ns0), [0, splitY], nr1, r3a]);\n\t} else { var state = 4 // 4\n\t\tt = (quad - A) / quad;\n\t\tq0 = midPoint(semiVerts[0], semiOuts[0], t);\n\t\tq1 = midPoint(semiOuts[0], semiIns[1], t);\n\t\tq2 = midPoint(semiIns[1], semiVerts[1], t);\n\t\tr0 = midPoint(q0, q1, t);\n\t\tr1 = midPoint(q1, q2, t);\n\t\ts0 = midPoint(r0, r1, t);\n\t\tv6 = pointAlongY(splitY, r3a, s0);\n\t\tv4 = fx(v6);\n\t\tnewVerts = [s0, s0, semiVerts[1], fx(s0), v4, [0, splitY], v6, v6];\n\t\tnewIns = tangentsRelative(newVerts, [s0, s0, q2, fx(r1), v4, [0, splitY], v6, v6]);\n\t\tnewOuts = tangentsRelative(newVerts, [s0, r1, fx(q2), fx(r0), v4, [0, splitY], v6, r0]);\n\t}\n}\n// FLIP THE SHAPE IF IT'S DISTAL\nif (isProximal != true) {\n\tvar tempVerts = newVerts;\n\tvar tempIns = newIns;\n\tvar tempOuts = newOuts;\n\tnewVerts = flipArrayY(tempVerts, -dist * 0.5).reverse();\n\tnewIns = flipArrayY(tempOuts, 0).reverse();\n\tnewOuts = flipArrayY(tempIns, 0).reverse();\n}\n// APPLY ROUNDING\nif (pers != 0) {\n\tvar pVert = isProximal ? 5 : 2;\n\tnewVerts[pVert] += isProximal ? [0, newVerts[pVert + 1][0] * pers] : [0, -newVerts[pVert + 1][0] * pers];\n\tnewIns[pVert] = [-newVerts[pVert + 1][0] * semiFac, 0];\n\tnewOuts[pVert] = [newVerts[pVert + 1][0] * semiFac, 0];\n\tvar B = isProximal ? Math.PI / 2 - A : -(Math.PI / 2 + A);\n\tvar temp6 = [0, newVerts[pVert + 1][0] * semiFac * pers];\n\tnewIns[pVert + 1][0] = -temp6[1] * Math.sin(B);\n\tnewIns[pVert + 1][1] = temp6[1] * Math.cos(B);\n\tvar temp4 = [0, newVerts[pVert + 1][0] * semiFac * pers];\n\tnewOuts[pVert - 1][0] = -temp4[1] * Math.sin(-B);\n\tnewOuts[pVert - 1][1] = temp4[1] * Math.cos(-B);\n}\n// APPLY SQUARE END\t\nif (squareEndValue && !isUpper && !isProximal) {\n\tif (state === 1) {\n\t\tnewVerts[5] = [0, -dist];\n\t\tnewOuts[4] = [0, 0];\n\t\tnewIns[6] = [0, 0];\n\t}\n\tif (state === 2) {\n\t\tnewVerts[6] = [0, -dist];\n\t\tnewOuts[5] = [0, 0];\n\t\tnewIns[7] = [0, 0];\n\t}\n\tif (state === 3) {\n\t\tnewVerts[5] = [-distrad, -dist];\n\t\tnewVerts[6] = [0, -dist];\n\t\tnewVerts[7] = [distrad, -dist];\n\t\tnewOuts[5] = [0, 0];\n\t\tnewIns[7] = [0, 0];\n\t}\n\tif (state === 4) {\n\t\tnewVerts[4] = [-distrad, -dist];\n\t\tnewVerts[5] = [0, -dist];\n\t\tnewVerts[6] = [distrad, -dist];\n\t\tnewVerts[7] = [distrad, -dist];\n\t\tnewOuts[4] = [0, 0];\n\t\tnewIns[6] = [0, 0];\n\t}\n}\ncreatePath(newVerts, newIns, newOuts, true);",
-                                    "value": "{\"closed\":true,\"featherInterps\":[\n\n],\"featherRadii\":[\n\n],\"featherRelCornerAngles\":[\n\n],\"featherRelSegLocs\":[\n\n],\"featherSegLocs\":[\n\n],\"featherTensions\":[\n\n],\"featherTypes\":[\n\n],\"inTangents\":[[-7.28732299804688,-64.4369049072266],[0,0],[0,0],[0,0],[-0.22428894042969,1.92170715332031],[-25.63232421875,0],[-2.90066528320312,-24.8536376953125],[0,0]],\"outTangents\":[[0,0],[0,0],[0,0],[0,0],[2.90066528320312,-24.8536376953125],[25.63232421875,0],[0,0],[0,0]],\"vertices\":[[57.1720123291016,-139.5],[57.1720123291016,-139.5],[0,-139.5],[-57.1720123291016,-139.5],[-49.660400390625,-205.858612060547],[0,-250],[49.660400390625,-205.858612060547],[49.660400390625,-205.858612060547]]}"
+                                    "value": "{\"closed\":true,\"featherInterps\":[\n\n],\"featherRadii\":[\n\n],\"featherRelCornerAngles\":[\n\n],\"featherRelSegLocs\":[\n\n],\"featherSegLocs\":[\n\n],\"featherTensions\":[\n\n],\"featherTypes\":[\n\n],\"inTangents\":[[-1.55744934082031,-47.7213897705078],[0,0],[0,0],[0,0],[-0.02108764648438,0.62608337402344],[-29.7444458007812,0],[-0.99415588378906,-29.5023956298828],[0,0]],\"outTangents\":[[0,0],[0,0],[0,0],[0,0],[0.99417114257812,-29.5023956298828],[29.7444458007812,0],[0,0],[0,0]],\"vertices\":[[56.5468139648438,-106.743362426758],[56.5468139648438,-106.743362426758],[0,-106.743362426758],[-56.5468139648438,-106.743362426758],[-54.9682769775391,-155.090835571289],[0,-208.204803466797],[54.96826171875,-155.090835571289],[54.96826171875,-155.090835571289]]}"
                                   }
                                 ],
                                 "enabled": true
@@ -321,7 +321,7 @@
                                     "type": "PROPERTY",
                                     "enabled": true,
                                     "expression": "thisComp.layer(\"{{ end }}\").effect(\"Limber\")(\"Lower Color\");",
-                                    "value": "[0.86666667461395,0.72549021244049,0.58823531866074,1]"
+                                    "value": "[0.36078432202339,0.27058824896812,0.22745099663734,1]"
                                   }
                                 ],
                                 "enabled": true
@@ -364,7 +364,7 @@
                         "type": "PROPERTY",
                         "enabled": true,
                         "expression": "thisComp.layer(\"{{ end }}\").content(\"Admin\").content(\"p2blend\").transform.position",
-                        "value": "[432.28756555323,300]"
+                        "value": "[358.055738707934,304.164657237248]"
                       },
                       {
                         "matchName": "ADBE Vector Rotation",
@@ -372,7 +372,7 @@
                         "type": "PROPERTY",
                         "enabled": true,
                         "expression": "thisComp.layer(\"{{ end }}\").content(\"Admin\").content(\"angles\").transform.anchorPoint[1]",
-                        "value": "221.409622109271"
+                        "value": "162.156681175039"
                       }
                     ],
                     "enabled": true
@@ -391,7 +391,7 @@
               },
               {
                 "matchName": "ADBE Vector Group",
-                "name": "Hand Group",
+                "name": "Foot Group",
                 "type": "NAMED_GROUP",
                 "properties": [
                   {
@@ -401,7 +401,7 @@
                     "properties": [
                       {
                         "matchName": "ADBE Vector Group",
-                        "name": "Fingers",
+                        "name": "Foot",
                         "type": "NAMED_GROUP",
                         "properties": [
                           {
@@ -410,203 +410,409 @@
                             "type": "INDEXED_GROUP",
                             "properties": [
                               {
-                                "matchName": "ADBE Vector Shape - Group",
-                                "name": "Thumb",
+                                "matchName": "ADBE Vector Group",
+                                "name": "Wedge Group",
                                 "type": "NAMED_GROUP",
                                 "properties": [
                                   {
-                                    "matchName": "ADBE Vector Shape",
-                                    "name": "Path",
-                                    "type": "PROPERTY",
-                                    "enabled": true,
-                                    "expression": "",
-                                    "value": "{\"closed\":false,\"featherInterps\":[\n\n],\"featherRadii\":[\n\n],\"featherRelCornerAngles\":[\n\n],\"featherRelSegLocs\":[\n\n],\"featherSegLocs\":[\n\n],\"featherTensions\":[\n\n],\"featherTypes\":[\n\n],\"inTangents\":[[3.0830078125,-11.2970275878906],[17.1410369873047,2.44125366210938]],\"outTangents\":[[-5.161865234375,18.9145660400391],[-32.456787109375,-4.62260437011719]],\"vertices\":[[2.48165893554688,35.7869415283203],[-38.3744964599609,61.9569702148438]]}"
-                                  }
-                                ],
-                                "enabled": true
-                              },
-                              {
-                                "matchName": "ADBE Vector Shape - Group",
-                                "name": "Index",
-                                "type": "NAMED_GROUP",
-                                "properties": [
-                                  {
-                                    "matchName": "ADBE Vector Shape",
-                                    "name": "Path",
-                                    "type": "PROPERTY",
-                                    "enabled": true,
-                                    "expression": "",
-                                    "value": "{\"closed\":false,\"featherInterps\":[\n\n],\"featherRadii\":[\n\n],\"featherRelCornerAngles\":[\n\n],\"featherRelSegLocs\":[\n\n],\"featherSegLocs\":[\n\n],\"featherTensions\":[\n\n],\"featherTypes\":[\n\n],\"inTangents\":[[0,0],[20.6535491943359,4.97735595703125]],\"outTangents\":[[0,0],[-31.8711547851562,-7.68070983886719]],\"vertices\":[[-24.0777130126953,27.7018280029297],[-73.8160400390625,24.1444854736328]]}"
-                                  }
-                                ],
-                                "enabled": true
-                              },
-                              {
-                                "matchName": "ADBE Vector Shape - Group",
-                                "name": "Middle",
-                                "type": "NAMED_GROUP",
-                                "properties": [
-                                  {
-                                    "matchName": "ADBE Vector Shape",
-                                    "name": "Path",
-                                    "type": "PROPERTY",
-                                    "enabled": true,
-                                    "expression": "",
-                                    "value": "{\"closed\":false,\"featherInterps\":[\n\n],\"featherRadii\":[\n\n],\"featherRelCornerAngles\":[\n\n],\"featherRelSegLocs\":[\n\n],\"featherSegLocs\":[\n\n],\"featherTensions\":[\n\n],\"featherTypes\":[\n\n],\"inTangents\":[[0,0],[18.6733551025391,6.05746459960938]],\"outTangents\":[[0,0],[-31.1886596679688,-10.1173095703125]],\"vertices\":[[-26.2741088867188,3.09153747558594],[-76.5399017333984,-15.1504364013672]]}"
-                                  }
-                                ],
-                                "enabled": true
-                              },
-                              {
-                                "matchName": "ADBE Vector Shape - Group",
-                                "name": "Ring",
-                                "type": "NAMED_GROUP",
-                                "properties": [
-                                  {
-                                    "matchName": "ADBE Vector Shape",
-                                    "name": "Path",
-                                    "type": "PROPERTY",
-                                    "enabled": true,
-                                    "expression": "",
-                                    "value": "{\"closed\":false,\"featherInterps\":[\n\n],\"featherRadii\":[\n\n],\"featherRelCornerAngles\":[\n\n],\"featherRelSegLocs\":[\n\n],\"featherSegLocs\":[\n\n],\"featherTensions\":[\n\n],\"featherTypes\":[\n\n],\"inTangents\":[[0,0],[18.6294250488281,15.6881103515625]],\"outTangents\":[[0,0],[-25.1340026855469,-21.1657409667969]],\"vertices\":[[-13.7106781005859,-17.8939208984375],[-54.6643676757812,-49.1814575195312]]}"
-                                  }
-                                ],
-                                "enabled": true
-                              },
-                              {
-                                "matchName": "ADBE Vector Shape - Group",
-                                "name": "Pinky",
-                                "type": "NAMED_GROUP",
-                                "properties": [
-                                  {
-                                    "matchName": "ADBE Vector Shape",
-                                    "name": "Path",
-                                    "type": "PROPERTY",
-                                    "enabled": true,
-                                    "expression": "",
-                                    "value": "{\"closed\":false,\"featherInterps\":[\n\n],\"featherRadii\":[\n\n],\"featherRelCornerAngles\":[\n\n],\"featherRelSegLocs\":[\n\n],\"featherSegLocs\":[\n\n],\"featherTensions\":[\n\n],\"featherTypes\":[\n\n],\"inTangents\":[[0,0],[8.7723388671875,13.1430206298828]],\"outTangents\":[[0,0],[-18.2863159179688,-27.3972320556641]],\"vertices\":[[6.70199584960938,-30.8654174804688],[-13.6219177246094,-57.6822204589844]]}"
-                                  }
-                                ],
-                                "enabled": true
-                              },
-                              {
-                                "matchName": "ADBE Vector Graphic - Stroke",
-                                "name": "Stroke 1",
-                                "type": "NAMED_GROUP",
-                                "properties": [
-                                  {
-                                    "matchName": "ADBE Vector Stroke Color",
-                                    "name": "Color",
-                                    "type": "PROPERTY",
-                                    "enabled": true,
-                                    "expression": "var endctrl = thisComp.layer(\"{{ end }}\"); endctrl.effect(\"Limber\")(\"Lower Color\");",
-                                    "value": "[0.86666667461395,0.72549021244049,0.58823531866074,1]"
+                                    "matchName": "ADBE Vectors Group",
+                                    "name": "Contents",
+                                    "type": "INDEXED_GROUP",
+                                    "properties": [
+                                      {
+                                        "matchName": "ADBE Vector Shape - Group",
+                                        "name": "Wedge Path",
+                                        "type": "NAMED_GROUP",
+                                        "properties": [
+                                          {
+                                            "matchName": "ADBE Vector Shape",
+                                            "name": "Path",
+                                            "type": "PROPERTY",
+                                            "enabled": true,
+                                            "expression": "var s4=thisLayer(4)(\"Foot Length\")((\"ADBE Slider Control-0001\")); var c3=thisProperty.propertyGroup(4)(\"C3 Group\")(\"Contents\")(\"C3\").size[0]/2; var c4=thisProperty.propertyGroup(4)(\"C4 Group\")(\"Contents\")(\"C4\").size[0]/2; try{var A=Math.acos(clamp((c3-c4)/s4,-1,1)); var r3a = 0-[c4*Math.sin(A),s4+c4*Math.cos(A)]; var r3b = 0-[c3*Math.sin(A),c3*Math.cos(A)];} catch(err) {value;} createPath(points = [[0-r3a[0], r3a[1]], r3a, r3b, [0-r3b[0], r3b[1]]], inTangents = [], outTangents = [], is_closed = true);",
+                                            "value": "{\"closed\":true,\"featherInterps\":[\n\n],\"featherRadii\":[\n\n],\"featherRelCornerAngles\":[\n\n],\"featherRelSegLocs\":[\n\n],\"featherSegLocs\":[\n\n],\"featherTensions\":[\n\n],\"featherTypes\":[\n\n],\"inTangents\":[[0,0],[0,0],[0,0],[0,0]],\"outTangents\":[[0,0],[0,0],[0,0],[0,0]],\"vertices\":[[29.0473785400391,-107.5],[-29.0473785400391,-107.5],[-53.2535247802734,-13.75],[53.2535247802734,-13.75]]}"
+                                          }
+                                        ],
+                                        "enabled": true
+                                      }
+                                    ],
+                                    "enabled": true
                                   },
                                   {
-                                    "matchName": "ADBE Vector Stroke Width",
-                                    "name": "Stroke Width",
-                                    "type": "PROPERTY",
-                                    "enabled": true,
-                                    "expression": "",
-                                    "value": "35"
+                                    "matchName": "ADBE Vector Transform Group",
+                                    "name": "Transform",
+                                    "type": "NAMED_GROUP",
+                                    "properties": [
+                                      
+                                    ],
+                                    "enabled": true
                                   },
                                   {
-                                    "matchName": "ADBE Vector Stroke Line Cap",
-                                    "name": "Line Cap",
+                                    "matchName": "ADBE Vector Materials Group",
+                                    "name": "Material Options",
+                                    "type": "NAMED_GROUP",
+                                    "properties": [
+                                      
+                                    ],
+                                    "enabled": true
+                                  }
+                                ],
+                                "enabled": true
+                              },
+                              {
+                                "matchName": "ADBE Vector Group",
+                                "name": "C3 Group",
+                                "type": "NAMED_GROUP",
+                                "properties": [
+                                  {
+                                    "matchName": "ADBE Vectors Group",
+                                    "name": "Contents",
+                                    "type": "INDEXED_GROUP",
+                                    "properties": [
+                                      {
+                                        "matchName": "ADBE Vector Shape - Ellipse",
+                                        "name": "C3",
+                                        "type": "NAMED_GROUP",
+                                        "properties": [
+                                          {
+                                            "matchName": "ADBE Vector Ellipse Size",
+                                            "name": "Size",
+                                            "type": "PROPERTY",
+                                            "enabled": true,
+                                            "expression": "var endctrl  = thisComp.layer(\"{{ end }}\"); endctrl.content(\"Admin\").content(\"p3ik\").transform.scale;",
+                                            "value": "[110,110]"
+                                          }
+                                        ],
+                                        "enabled": true
+                                      }
+                                    ],
+                                    "enabled": true
+                                  },
+                                  {
+                                    "matchName": "ADBE Vector Transform Group",
+                                    "name": "Transform",
+                                    "type": "NAMED_GROUP",
+                                    "properties": [
+                                      
+                                    ],
+                                    "enabled": true
+                                  },
+                                  {
+                                    "matchName": "ADBE Vector Materials Group",
+                                    "name": "Material Options",
+                                    "type": "NAMED_GROUP",
+                                    "properties": [
+                                      
+                                    ],
+                                    "enabled": true
+                                  }
+                                ],
+                                "enabled": true
+                              },
+                              {
+                                "matchName": "ADBE Vector Group",
+                                "name": "C4 Group",
+                                "type": "NAMED_GROUP",
+                                "properties": [
+                                  {
+                                    "matchName": "ADBE Vectors Group",
+                                    "name": "Contents",
+                                    "type": "INDEXED_GROUP",
+                                    "properties": [
+                                      {
+                                        "matchName": "ADBE Vector Shape - Ellipse",
+                                        "name": "C4",
+                                        "type": "NAMED_GROUP",
+                                        "properties": [
+                                          {
+                                            "matchName": "ADBE Vector Ellipse Size",
+                                            "name": "Size",
+                                            "type": "PROPERTY",
+                                            "enabled": true,
+                                            "expression": "temp = thisLayer(4)(\"Foot C4 Diameter\")((\"ADBE Slider Control-0001\"));\n[temp, temp]",
+                                            "value": "[60,60]"
+                                          }
+                                        ],
+                                        "enabled": true
+                                      },
+                                      {
+                                        "matchName": "ADBE Vector Group",
+                                        "name": "Toes Group",
+                                        "type": "NAMED_GROUP",
+                                        "properties": [
+                                          {
+                                            "matchName": "ADBE Vectors Group",
+                                            "name": "Contents",
+                                            "type": "INDEXED_GROUP",
+                                            "properties": [
+                                              {
+                                                "matchName": "ADBE Vector Group",
+                                                "name": "Wedge Group",
+                                                "type": "NAMED_GROUP",
+                                                "properties": [
+                                                  {
+                                                    "matchName": "ADBE Vectors Group",
+                                                    "name": "Contents",
+                                                    "type": "INDEXED_GROUP",
+                                                    "properties": [
+                                                      {
+                                                        "matchName": "ADBE Vector Shape - Group",
+                                                        "name": "Wedge Path",
+                                                        "type": "NAMED_GROUP",
+                                                        "properties": [
+                                                          {
+                                                            "matchName": "ADBE Vector Shape",
+                                                            "name": "Path",
+                                                            "type": "PROPERTY",
+                                                            "enabled": true,
+                                                            "expression": "var s4=thisLayer(4)(\"Toe Length\")((\"ADBE Slider Control-0001\")); var c3=thisProperty.propertyGroup(4)(\"C4 Group\")(\"Contents\")(\"C4\").size[0]/2; var c4=thisProperty.propertyGroup(4)(\"C5 Group\")(\"Contents\")(\"C5\").size[0]/2; try{var A=Math.acos(clamp((c3-c4)/s4,-1,1)); var r3a = 0-[c4*Math.sin(A),s4+c4*Math.cos(A)]; var r3b = 0-[c3*Math.sin(A),c3*Math.cos(A)];} catch(err) {value;} createPath(points = [[0-r3a[0], r3a[1]], r3a, r3b, [0-r3b[0], r3b[1]]], inTangents = [], outTangents = [], is_closed = true);",
+                                                            "value": "{\"closed\":true,\"featherInterps\":[\n\n],\"featherRadii\":[\n\n],\"featherRelCornerAngles\":[\n\n],\"featherRelSegLocs\":[\n\n],\"featherSegLocs\":[\n\n],\"featherTensions\":[\n\n],\"featherTypes\":[\n\n],\"inTangents\":[[0,0],[0,0],[0,0],[0,0]],\"outTangents\":[[0,0],[0,0],[0,0],[0,0]],\"vertices\":[[19.3649139404297,-45],[-19.3649139404297,-45],[-29.0473785400391,-7.5],[29.0473785400391,-7.5]]}"
+                                                          }
+                                                        ],
+                                                        "enabled": true
+                                                      }
+                                                    ],
+                                                    "enabled": true
+                                                  },
+                                                  {
+                                                    "matchName": "ADBE Vector Transform Group",
+                                                    "name": "Transform",
+                                                    "type": "NAMED_GROUP",
+                                                    "properties": [
+                                                      
+                                                    ],
+                                                    "enabled": true
+                                                  },
+                                                  {
+                                                    "matchName": "ADBE Vector Materials Group",
+                                                    "name": "Material Options",
+                                                    "type": "NAMED_GROUP",
+                                                    "properties": [
+                                                      
+                                                    ],
+                                                    "enabled": true
+                                                  }
+                                                ],
+                                                "enabled": true
+                                              },
+                                              {
+                                                "matchName": "ADBE Vector Group",
+                                                "name": "C4 Group",
+                                                "type": "NAMED_GROUP",
+                                                "properties": [
+                                                  {
+                                                    "matchName": "ADBE Vectors Group",
+                                                    "name": "Contents",
+                                                    "type": "INDEXED_GROUP",
+                                                    "properties": [
+                                                      {
+                                                        "matchName": "ADBE Vector Shape - Ellipse",
+                                                        "name": "C4",
+                                                        "type": "NAMED_GROUP",
+                                                        "properties": [
+                                                          {
+                                                            "matchName": "ADBE Vector Ellipse Size",
+                                                            "name": "Size",
+                                                            "type": "PROPERTY",
+                                                            "enabled": true,
+                                                            "expression": "temp = thisLayer(4)(\"Foot C4 Diameter\")((\"ADBE Slider Control-0001\"));\n[temp, temp]",
+                                                            "value": "[60,60]"
+                                                          }
+                                                        ],
+                                                        "enabled": true
+                                                      }
+                                                    ],
+                                                    "enabled": true
+                                                  },
+                                                  {
+                                                    "matchName": "ADBE Vector Transform Group",
+                                                    "name": "Transform",
+                                                    "type": "NAMED_GROUP",
+                                                    "properties": [
+                                                      
+                                                    ],
+                                                    "enabled": true
+                                                  },
+                                                  {
+                                                    "matchName": "ADBE Vector Materials Group",
+                                                    "name": "Material Options",
+                                                    "type": "NAMED_GROUP",
+                                                    "properties": [
+                                                      
+                                                    ],
+                                                    "enabled": true
+                                                  }
+                                                ],
+                                                "enabled": true
+                                              },
+                                              {
+                                                "matchName": "ADBE Vector Group",
+                                                "name": "C5 Group",
+                                                "type": "NAMED_GROUP",
+                                                "properties": [
+                                                  {
+                                                    "matchName": "ADBE Vectors Group",
+                                                    "name": "Contents",
+                                                    "type": "INDEXED_GROUP",
+                                                    "properties": [
+                                                      {
+                                                        "matchName": "ADBE Vector Shape - Ellipse",
+                                                        "name": "C5",
+                                                        "type": "NAMED_GROUP",
+                                                        "properties": [
+                                                          {
+                                                            "matchName": "ADBE Vector Ellipse Size",
+                                                            "name": "Size",
+                                                            "type": "PROPERTY",
+                                                            "enabled": true,
+                                                            "expression": "temp = thisLayer(4)(\"Foot C5 Diameter\")((\"ADBE Slider Control-0001\"));\n[temp, temp]",
+                                                            "value": "[40,40]"
+                                                          }
+                                                        ],
+                                                        "enabled": true
+                                                      }
+                                                    ],
+                                                    "enabled": true
+                                                  },
+                                                  {
+                                                    "matchName": "ADBE Vector Transform Group",
+                                                    "name": "Transform",
+                                                    "type": "NAMED_GROUP",
+                                                    "properties": [
+                                                      {
+                                                        "matchName": "ADBE Vector Position",
+                                                        "name": "Position",
+                                                        "type": "PROPERTY",
+                                                        "enabled": true,
+                                                        "expression": "var s4=thisLayer(4)(\"Toe Length\")((\"ADBE Slider Control-0001\"));\n[0,-s4];",
+                                                        "value": "[0,-40]"
+                                                      }
+                                                    ],
+                                                    "enabled": true
+                                                  },
+                                                  {
+                                                    "matchName": "ADBE Vector Materials Group",
+                                                    "name": "Material Options",
+                                                    "type": "NAMED_GROUP",
+                                                    "properties": [
+                                                      
+                                                    ],
+                                                    "enabled": true
+                                                  }
+                                                ],
+                                                "enabled": true
+                                              },
+                                              {
+                                                "matchName": "ADBE Vector Filter - Merge",
+                                                "name": "Merge Paths Add",
+                                                "type": "NAMED_GROUP",
+                                                "properties": [
+                                                  {
+                                                    "matchName": "ADBE Vector Merge Type",
+                                                    "name": "Mode",
+                                                    "type": "PROPERTY",
+                                                    "enabled": true,
+                                                    "value": "2"
+                                                  }
+                                                ],
+                                                "enabled": true
+                                              },
+                                              {
+                                                "matchName": "ADBE Vector Graphic - Fill",
+                                                "name": "Fill",
+                                                "type": "NAMED_GROUP",
+                                                "properties": [
+                                                  {
+                                                    "matchName": "ADBE Vector Fill Color",
+                                                    "name": "Color",
+                                                    "type": "PROPERTY",
+                                                    "enabled": true,
+                                                    "expression": "var endctrl = thisComp.layer(\"{{ end }}\"); endctrl.effect(\"Limber\")(\"Lower Color\");",
+                                                    "value": "[0.36078432202339,0.27058824896812,0.22745099663734,1]"
+                                                  }
+                                                ],
+                                                "enabled": true
+                                              }
+                                            ],
+                                            "enabled": true
+                                          },
+                                          {
+                                            "matchName": "ADBE Vector Transform Group",
+                                            "name": "Transform",
+                                            "type": "NAMED_GROUP",
+                                            "properties": [
+                                              {
+                                                "matchName": "ADBE Vector Rotation",
+                                                "name": "Rotation",
+                                                "type": "PROPERTY",
+                                                "enabled": true,
+                                                "expression": "thisLayer(4)(\"Toe Rotation\")((\"ADBE Angle Control-0001\")\n);",
+                                                "value": "-25"
+                                              }
+                                            ],
+                                            "enabled": true
+                                          },
+                                          {
+                                            "matchName": "ADBE Vector Materials Group",
+                                            "name": "Material Options",
+                                            "type": "NAMED_GROUP",
+                                            "properties": [
+                                              
+                                            ],
+                                            "enabled": true
+                                          }
+                                        ],
+                                        "enabled": true
+                                      }
+                                    ],
+                                    "enabled": true
+                                  },
+                                  {
+                                    "matchName": "ADBE Vector Transform Group",
+                                    "name": "Transform",
+                                    "type": "NAMED_GROUP",
+                                    "properties": [
+                                      {
+                                        "matchName": "ADBE Vector Position",
+                                        "name": "Position",
+                                        "type": "PROPERTY",
+                                        "enabled": true,
+                                        "expression": "var s4=thisLayer(4)(\"Foot Length\")((\"ADBE Slider Control-0001\"));\n[0,-s4];",
+                                        "value": "[0,-100]"
+                                      }
+                                    ],
+                                    "enabled": true
+                                  },
+                                  {
+                                    "matchName": "ADBE Vector Materials Group",
+                                    "name": "Material Options",
+                                    "type": "NAMED_GROUP",
+                                    "properties": [
+                                      
+                                    ],
+                                    "enabled": true
+                                  }
+                                ],
+                                "enabled": true
+                              },
+                              {
+                                "matchName": "ADBE Vector Filter - Merge",
+                                "name": "Merge Paths Add",
+                                "type": "NAMED_GROUP",
+                                "properties": [
+                                  {
+                                    "matchName": "ADBE Vector Merge Type",
+                                    "name": "Mode",
                                     "type": "PROPERTY",
                                     "enabled": true,
                                     "value": "2"
-                                  },
-                                  {
-                                    "matchName": "ADBE Vector Stroke Dashes",
-                                    "name": "Dashes",
-                                    "type": "NAMED_GROUP",
-                                    "properties": [
-                                      
-                                    ],
-                                    "enabled": true
-                                  },
-                                  {
-                                    "matchName": "ADBE Vector Stroke Taper",
-                                    "name": "Taper",
-                                    "type": "NAMED_GROUP",
-                                    "properties": [
-                                      
-                                    ],
-                                    "enabled": true
-                                  },
-                                  {
-                                    "matchName": "ADBE Vector Stroke Wave",
-                                    "name": "Wave",
-                                    "type": "NAMED_GROUP",
-                                    "properties": [
-                                      
-                                    ],
-                                    "enabled": true
-                                  }
-                                ],
-                                "enabled": true
-                              }
-                            ],
-                            "enabled": true
-                          },
-                          {
-                            "matchName": "ADBE Vector Transform Group",
-                            "name": "Transform",
-                            "type": "NAMED_GROUP",
-                            "properties": [
-                              {
-                                "matchName": "ADBE Vector Rotation",
-                                "name": "Rotation",
-                                "type": "PROPERTY",
-                                "enabled": true,
-                                "expression": "",
-                                "value": "90"
-                              }
-                            ],
-                            "enabled": true
-                          },
-                          {
-                            "matchName": "ADBE Vector Materials Group",
-                            "name": "Material Options",
-                            "type": "NAMED_GROUP",
-                            "properties": [
-                              
-                            ],
-                            "enabled": true
-                          }
-                        ],
-                        "enabled": true
-                      },
-                      {
-                        "matchName": "ADBE Vector Group",
-                        "name": "Palm",
-                        "type": "NAMED_GROUP",
-                        "properties": [
-                          {
-                            "matchName": "ADBE Vectors Group",
-                            "name": "Contents",
-                            "type": "INDEXED_GROUP",
-                            "properties": [
-                              {
-                                "matchName": "ADBE Vector Shape - Ellipse",
-                                "name": "C3",
-                                "type": "NAMED_GROUP",
-                                "properties": [
-                                  {
-                                    "matchName": "ADBE Vector Ellipse Size",
-                                    "name": "Size",
-                                    "type": "PROPERTY",
-                                    "enabled": true,
-                                    "expression": "",
-                                    "value": "[110,110]"
                                   }
                                 ],
                                 "enabled": true
                               },
                               {
                                 "matchName": "ADBE Vector Graphic - Fill",
-                                "name": "Fill 1",
+                                "name": "Fill",
                                 "type": "NAMED_GROUP",
                                 "properties": [
                                   {
@@ -615,7 +821,7 @@
                                     "type": "PROPERTY",
                                     "enabled": true,
                                     "expression": "var endctrl = thisComp.layer(\"{{ end }}\"); endctrl.effect(\"Limber\")(\"Lower Color\");",
-                                    "value": "[0.86666667461395,0.72549021244049,0.58823531866074,1]"
+                                    "value": "[0.36078432202339,0.27058824896812,0.22745099663734,1]"
                                   }
                                 ],
                                 "enabled": true
@@ -653,36 +859,20 @@
                     "type": "NAMED_GROUP",
                     "properties": [
                       {
-                        "matchName": "ADBE Vector Anchor",
-                        "name": "Anchor Point",
-                        "type": "PROPERTY",
-                        "enabled": true,
-                        "expression": "",
-                        "value": "[0,30]"
-                      },
-                      {
                         "matchName": "ADBE Vector Position",
                         "name": "Position",
                         "type": "PROPERTY",
                         "enabled": true,
-                        "expression": "var endctrl = thisComp.layer(\"{{ end }}\"); var s1 = endctrl.content(\"Admin\").content(\"sides\").transform.position[0]; var s3 = endctrl.content(\"Admin\").content(\"sides\").transform.position[1]; var a1=degreesToRadians(endctrl.content(\"Admin\").content(\"angles\").transform.anchorPoint[0]); var a2=degreesToRadians(endctrl.content(\"Admin\").content(\"angles\").transform.anchorPoint[1]); var p2 = endctrl.content(\"Admin\").content(\"p1\").transform.position+[Math.sin(a1)*s3,-Math.cos(a1)*s3]; p2+[Math.sin(a2)*s1,-Math.cos(a2)*s1];",
-                        "value": "[300,450]"
-                      },
-                      {
-                        "matchName": "ADBE Vector Scale",
-                        "name": "Scale",
-                        "type": "PROPERTY",
-                        "enabled": true,
-                        "expression": "var endctrl = thisComp.layer(\"{{ end }}\");\nvar sizeScale = endctrl.effect(\"Limber\")(\"Size Scale\");\n[sizeScale, sizeScale]",
-                        "value": "[100,100]"
+                        "expression": "var endctrl  = thisComp.layer(\"{{ end }}\"); var s1 = endctrl.content(\"Admin\").content(\"sides\").transform.position[0]; var s3 = endctrl.content(\"Admin\").content(\"sides\").transform.position[1]; var a1=degreesToRadians(endctrl.content(\"Admin\").content(\"angles\").transform.anchorPoint[0]); var a2=degreesToRadians(endctrl.content(\"Admin\").content(\"angles\").transform.anchorPoint[1]); var p2 = endctrl.content(\"Admin\").content(\"p1\").transform.position+[Math.sin(a1)*s3,-Math.cos(a1)*s3]; p2+[Math.sin(a2)*s1,-Math.cos(a2)*s1];",
+                        "value": "[405,450]"
                       },
                       {
                         "matchName": "ADBE Vector Rotation",
                         "name": "Rotation",
                         "type": "PROPERTY",
                         "enabled": true,
-                        "expression": "var endctrl = thisComp.layer(\"{{ end }}\");\n(endctrl.effect(\"Limber\")(\"Rotate End\")/100)*(endctrl.content(\"Admin\").content(\"angles\").transform.anchorPoint[1]+thisLayer(4)(\"Hand Rotation\")((\"ADBE Angle Control-0001\")\n)) + (1-(endctrl.effect(\"Limber\")(\"Rotate End\")/100))*(180-thisLayer(4)(\"Hand Rotation\")((\"ADBE Angle Control-0001\")\n));",
-                        "value": "221.409622109271"
+                        "expression": "var endctrl = thisComp.layer(\"{{ end }}\");\nvar rot = (endctrl.effect(\"Limber\")(\"Clockwise\") >0 ? 90:-90)\nif (endctrl.effect(\"Limber\")(\"Rotate End\") == 1) {thisLayer(2)(\"Admin\").content(\"a2\")(3)(6)+(endctrl.effect(\"Limber\")(\"Clockwise\") == 1 ? thisLayer(4)(\"Foot Rotation\")((\"ADBE Angle Control-0001\")\n): -thisLayer(4)(\"Foot Rotation\")((\"ADBE Angle Control-0001\")\n))-rot} else thisLayer(4)(\"Foot Rotation\")((\"ADBE Angle Control-0001\")\n)+rot",
+                        "value": "77"
                       }
                     ],
                     "enabled": true
@@ -772,10 +962,183 @@
     "type": "INDEXED_GROUP",
     "properties": [
       {
-        "matchName": "ADBE Angle Control",
-        "name": "Hand Rotation",
+        "matchName": "ADBE Slider Control",
+        "name": "Foot C4 Diameter",
         "type": "NAMED_GROUP",
         "properties": [
+          {
+            "matchName": "ADBE Slider Control-0001",
+            "name": "Slider",
+            "type": "PROPERTY",
+            "enabled": true,
+            "expression": "",
+            "value": "60"
+          },
+          {
+            "matchName": "ADBE Effect Built In Params",
+            "name": "Compositing Options",
+            "type": "NAMED_GROUP",
+            "properties": [
+              {
+                "matchName": "ADBE Effect Mask Parade",
+                "name": "Masks",
+                "type": "INDEXED_GROUP",
+                "properties": [
+                  
+                ],
+                "enabled": true
+              }
+            ],
+            "enabled": true
+          }
+        ],
+        "enabled": true
+      },
+      {
+        "matchName": "ADBE Slider Control",
+        "name": "Foot C5 Diameter",
+        "type": "NAMED_GROUP",
+        "properties": [
+          {
+            "matchName": "ADBE Slider Control-0001",
+            "name": "Slider",
+            "type": "PROPERTY",
+            "enabled": true,
+            "expression": "",
+            "value": "40"
+          },
+          {
+            "matchName": "ADBE Effect Built In Params",
+            "name": "Compositing Options",
+            "type": "NAMED_GROUP",
+            "properties": [
+              {
+                "matchName": "ADBE Effect Mask Parade",
+                "name": "Masks",
+                "type": "INDEXED_GROUP",
+                "properties": [
+                  
+                ],
+                "enabled": true
+              }
+            ],
+            "enabled": true
+          }
+        ],
+        "enabled": true
+      },
+      {
+        "matchName": "ADBE Slider Control",
+        "name": "Foot Length",
+        "type": "NAMED_GROUP",
+        "properties": [
+          {
+            "matchName": "ADBE Slider Control-0001",
+            "name": "Slider",
+            "type": "PROPERTY",
+            "enabled": true,
+            "expression": "",
+            "value": "100"
+          },
+          {
+            "matchName": "ADBE Effect Built In Params",
+            "name": "Compositing Options",
+            "type": "NAMED_GROUP",
+            "properties": [
+              {
+                "matchName": "ADBE Effect Mask Parade",
+                "name": "Masks",
+                "type": "INDEXED_GROUP",
+                "properties": [
+                  
+                ],
+                "enabled": true
+              }
+            ],
+            "enabled": true
+          }
+        ],
+        "enabled": true
+      },
+      {
+        "matchName": "ADBE Slider Control",
+        "name": "Toe Length",
+        "type": "NAMED_GROUP",
+        "properties": [
+          {
+            "matchName": "ADBE Slider Control-0001",
+            "name": "Slider",
+            "type": "PROPERTY",
+            "enabled": true,
+            "expression": "",
+            "value": "40"
+          },
+          {
+            "matchName": "ADBE Effect Built In Params",
+            "name": "Compositing Options",
+            "type": "NAMED_GROUP",
+            "properties": [
+              {
+                "matchName": "ADBE Effect Mask Parade",
+                "name": "Masks",
+                "type": "INDEXED_GROUP",
+                "properties": [
+                  
+                ],
+                "enabled": true
+              }
+            ],
+            "enabled": true
+          }
+        ],
+        "enabled": true
+      },
+      {
+        "matchName": "ADBE Angle Control",
+        "name": "Foot Rotation",
+        "type": "NAMED_GROUP",
+        "properties": [
+          {
+            "matchName": "ADBE Angle Control-0001",
+            "name": "Angle",
+            "type": "PROPERTY",
+            "enabled": true,
+            "expression": "",
+            "value": "-13"
+          },
+          {
+            "matchName": "ADBE Effect Built In Params",
+            "name": "Compositing Options",
+            "type": "NAMED_GROUP",
+            "properties": [
+              {
+                "matchName": "ADBE Effect Mask Parade",
+                "name": "Masks",
+                "type": "INDEXED_GROUP",
+                "properties": [
+                  
+                ],
+                "enabled": true
+              }
+            ],
+            "enabled": true
+          }
+        ],
+        "enabled": true
+      },
+      {
+        "matchName": "ADBE Angle Control",
+        "name": "Toe Rotation",
+        "type": "NAMED_GROUP",
+        "properties": [
+          {
+            "matchName": "ADBE Angle Control-0001",
+            "name": "Angle",
+            "type": "PROPERTY",
+            "enabled": true,
+            "expression": "",
+            "value": "-25"
+          },
           {
             "matchName": "ADBE Effect Built In Params",
             "name": "Compositing Options",

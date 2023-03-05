@@ -12,7 +12,7 @@
                     "label": "3 Part Bone with Foot",
                     "url": "3PartBonewithFoot.json",
                     "img": "3PartBonewithFoot.png",
-                    "description": ""
+                    "description": "This is the same as Bone with Foot except that the three sections of the limb are all generated as totally separate paths in the limb layer.\r\rThe three stroke colors have not been linked to the Upper, Middle and Lower color of the Limber effect (but they could be).\r\rIf you don’t want the foot, simply delete the Foot Group from the limb layer."
                 },
                 {
                     "id": 1160,

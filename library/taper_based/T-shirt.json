@@ -164,7 +164,7 @@
                         "type": "PROPERTY",
                         "enabled": true,
                         "expression": "var endctrl = thisComp.layer(\"{{ end }}\"); \nendctrl.content(\"Admin\").content(\"p2blend\").transform.position;",
-                        "value": "[342.347871150131,345.465234272113]"
+                        "value": "[432.28756555323,300]"
                       },
                       {
                         "matchName": "ADBE Vector Rotation",
@@ -172,7 +172,7 @@
                         "type": "PROPERTY",
                         "enabled": true,
                         "expression": "var endctrl = thisComp.layer(\"{{ end }}\"); \nendctrl.content(\"Admin\").content(\"angles\").transform.anchorPoint[1];",
-                        "value": "233.296521075411"
+                        "value": "221.409622109271"
                       }
                     ],
                     "enabled": true
@@ -1173,7 +1173,7 @@
                         "type": "PROPERTY",
                         "enabled": true,
                         "expression": "var endctrl  = thisComp.layer(\"{{ end }}\"); \n\nendctrl.content(\"Admin\").content(\"angles\").transform.anchorPoint[0];",
-                        "value": "167.775697563338"
+                        "value": "138.590377890729"
                       }
                     ],
                     "enabled": true
@@ -1444,7 +1444,7 @@
                         "type": "PROPERTY",
                         "enabled": true,
                         "expression": "var endctrl  = thisComp.layer(\"{{ end }}\"); \n\nendctrl.content(\"Admin\").content(\"p2blend\").transform.position;",
-                        "value": "[342.347871150131,345.465234272113]"
+                        "value": "[432.28756555323,300]"
                       },
                       {
                         "matchName": "ADBE Vector Rotation",
@@ -1452,7 +1452,7 @@
                         "type": "PROPERTY",
                         "enabled": true,
                         "expression": "var endctrl  = thisComp.layer(\"{{ end }}\");\n\nendctrl.content(\"Admin\").content(\"angles\").transform.anchorPoint[1];",
-                        "value": "233.296521075411"
+                        "value": "221.409622109271"
                       }
                     ],
                     "enabled": true
