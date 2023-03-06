@@ -63,15 +63,15 @@
                                 "type": "PROPERTY",
                                 "enabled": true,
                                 "expression": "content(\"Limb\").content(\"Outer End - Inside\").content(\"Sleeve End Group\").transform.position",
-                                "value": "[180.882736379771,350.114323353698]"
+                                "value": "[341.066009882568,363.281335879107]"
                               },
                               {
                                 "matchName": "ADBE Vector Scale",
                                 "name": "Scale",
                                 "type": "PROPERTY",
                                 "enabled": true,
-                                "expression": "var endctrl  = thisComp.layer(\"{{ end }}\");\nvar c2 = endctrl.content(\"Admin\").content(\"p2blend\").transform.scale[0];\n[thisComp.layer(\"{{ end }}\").effect(\"Limber\")(\"Lower Rounding\") > 0 ? 0 : c2, thisComp.layer(\"{{ end }}\").effect(\"Limber\")(\"Lower Rounding\")/100*c2]",
-                                "value": "[0,64.10828392818]"
+                                "expression": "var endctrl  = thisComp.layer(\"{{ end }}\");\nvar c2 = endctrl.content(\"Admin\").content(\"p1\").transform.scale[0];\n[thisComp.layer(\"{{ end }}\").effect(\"Limber\")(\"Lower Rounding\") > 0 ? 0 : c2, thisComp.layer(\"{{ end }}\").effect(\"Limber\")(\"Lower Rounding\")/100*c2]",
+                                "value": "[0,76.4583332808742]"
                               },
                               {
                                 "matchName": "ADBE Vector Rotation",
@@ -79,7 +79,7 @@
                                 "type": "PROPERTY",
                                 "enabled": true,
                                 "expression": "content(\"Limb\").content(\"Outer End - Inside\").content(\"Sleeve End Group\").transform.rotation",
-                                "value": "174.734553957454"
+                                "value": "-163.710957639895"
                               }
                             ],
                             "enabled": true
@@ -157,7 +157,7 @@
                             "type": "PROPERTY",
                             "enabled": true,
                             "expression": "content(\"Limb\").content(\"Inner\").content(\"Path\").path",
-                            "value": "{\"closed\":false,\"featherInterps\":[\n\n],\"featherRadii\":[\n\n],\"featherRelCornerAngles\":[\n\n],\"featherRelSegLocs\":[\n\n],\"featherSegLocs\":[\n\n],\"featherTensions\":[\n\n],\"featherTypes\":[\n\n],\"inTangents\":[[0,0],[21.7814788818359,-76.9777069091797],[0,0]],\"outTangents\":[[0,0],[-21.7814788818359,76.9776916503906],[0,0]],\"vertices\":[[300,150],[185.555313110352,285.567108154297],[212,461]]}"
+                            "value": "{\"closed\":false,\"featherInterps\":[\n\n],\"featherRadii\":[\n\n],\"featherRelCornerAngles\":[\n\n],\"featherRelSegLocs\":[\n\n],\"featherSegLocs\":[\n\n],\"featherTensions\":[\n\n],\"featherTypes\":[\n\n],\"inTangents\":[[0,0],[0,-80],[0,0]],\"outTangents\":[[0,0],[0,80],[0,0]],\"vertices\":[[300,150],[350.689697265625,300],[300,450]]}"
                           }
                         ],
                         "enabled": true
@@ -172,8 +172,8 @@
                             "name": "End",
                             "type": "PROPERTY",
                             "enabled": true,
-                            "expression": "thisLayer.effect(\"Trim Sleeve\")(\"ADBE Slider Control-0001\")",
-                            "value": "68"
+                            "expression": "thisComp.layer(\"{{ end }}\").effect(\"Limber\")(\"Lower Split\")",
+                            "value": "70"
                           }
                         ],
                         "enabled": true
@@ -188,8 +188,8 @@
                             "name": "Amount",
                             "type": "PROPERTY",
                             "enabled": true,
-                            "expression": "var endctrl  = thisComp.layer(\"{{ end }}\");\nendctrl.content(\"Admin\").content(\"p2blend\").transform.scale[0]/2",
-                            "value": "58.5"
+                            "expression": "var endctrl  = thisComp.layer(\"{{ end }}\");\nendctrl.content(\"Admin\").content(\"p1\").transform.scale[0]/2",
+                            "value": "50"
                           }
                         ],
                         "enabled": true
@@ -214,8 +214,8 @@
                                     "name": "Size",
                                     "type": "PROPERTY",
                                     "enabled": true,
-                                    "expression": "var endctrl  = thisComp.layer(\"{{ end }}\");\nendctrl.content(\"Admin\").content(\"p2blend\").transform.scale",
-                                    "value": "[117,117]"
+                                    "expression": "var endctrl  = thisComp.layer(\"{{ end }}\");\nendctrl.content(\"Admin\").content(\"p1\").transform.scale",
+                                    "value": "[100,100]"
                                   }
                                 ],
                                 "enabled": true
@@ -298,8 +298,8 @@
                                 "name": "Position",
                                 "type": "PROPERTY",
                                 "enabled": true,
-                                "expression": "content(\"Limb\").content(\"Inner\").content(\"Path\").path.pointOnPath(thisLayer.effect(\"Trim Sleeve\")(\"ADBE Slider Control-0001\")*.01)",
-                                "value": "[180.882736379771,350.114323353698]"
+                                "expression": "content(\"Limb\").content(\"Inner\").content(\"Path\").path.pointOnPath(thisComp.layer(\"{{ end }}\").effect(\"Limber\")(\"Lower Split\")*.01)",
+                                "value": "[341.066009882568,363.281335879107]"
                               },
                               {
                                 "matchName": "ADBE Vector Scale",
@@ -307,15 +307,15 @@
                                 "type": "PROPERTY",
                                 "enabled": true,
                                 "expression": "[content(\"Limb\").content(\"Outer\").content(\"Sleeve Start Group\").content(\"Ellipse Path\").size[0], thisComp.layer(\"{{ end }}\").effect(\"Limber\")(\"Lower Rounding\")*content(\"Limb\").content(\"Outer\").content(\"Sleeve Start Group\").content(\"Ellipse Path\").size[0]/100]",
-                                "value": "[117,64.10828392818]"
+                                "value": "[100,76.4583332808742]"
                               },
                               {
                                 "matchName": "ADBE Vector Rotation",
                                 "name": "Rotation",
                                 "type": "PROPERTY",
                                 "enabled": true,
-                                "expression": "var myPath = thisComp.layer(\"{{ limb }}\").content(\"Limb\").content(\"Inner\").content(\"Path\").path;\nvar vertex = myPath.pointOnPath(thisLayer.effect(\"Trim Sleeve\")(\"ADBE Slider Control-0001\")*.01);\nvar tangent = myPath.normalOnPath(thisLayer.effect(\"Trim Sleeve\")(\"ADBE Slider Control-0001\")*.01);\nradiansToDegrees(Math.atan2((tangent)[1],(tangent)[0]))",
-                                "value": "174.734553957454"
+                                "expression": "var myPath = thisComp.layer(\"{{ limb }}\").content(\"Limb\").content(\"Inner\").content(\"Path\").path;\nvar mySplit = thisComp.layer(\"{{ end }}\").effect(\"Limber\")(\"Lower Split\");\nvar vertex = myPath.pointOnPath(mySplit*.01);\nvar tangent = myPath.normalOnPath(mySplit*.01);\nradiansToDegrees(Math.atan2((tangent)[1],(tangent)[0]))",
+                                "value": "-163.710957639895"
                               }
                             ],
                             "enabled": true
@@ -408,7 +408,7 @@
                             "type": "PROPERTY",
                             "enabled": true,
                             "expression": "var endctrl  = thisComp.layer(\"{{ end }}\");\nvar curveLin = endctrl.effect(\"Limber\")(\"Bone Curvature\")/100;\nif (curveLin === 0) {\n\tcreatePath([endctrl.content(\"Admin\").content(\"p1\").transform.position, endctrl.content(\"Admin\").content(\"p2blend\").transform.position, endctrl.content(\"Admin\").content(\"p3blend\").transform.position], [], [], 0);\n\t} else {\nvar angs = endctrl.content(\"Admin\").content(\"angles\").transform.anchorPoint;\nvar avang = degreesToRadians((angs[0]+angs[1]-180)/2);\nvar linkScale = endctrl.effect(\"Limber\")(\"Link Length to Size Scale\");\nvar tangLeng = curveLin * (endctrl.effect(\"Limber\")(\"Upper Length\")+endctrl.effect(\"Limber\")(\"Lower Length\")) / 2 * (linkScale == true ? endctrl.effect(\"Limber\")(\"Size Scale\")/100 : 1);\nvar tangPos = [Math.cos(avang) * tangLeng, Math.sin(avang) * tangLeng];\ncreatePath([endctrl.content(\"Admin\").content(\"p1\").transform.position, endctrl.content(\"Admin\").content(\"p2blend\").transform.position, endctrl.content(\"Admin\").content(\"p3blend\").transform.position], [[0,0], -tangPos, [0,0]], [[0,0], tangPos, [0,0]], 0);}",
-                            "value": "{\"closed\":false,\"featherInterps\":[\n\n],\"featherRadii\":[\n\n],\"featherRelCornerAngles\":[\n\n],\"featherRelSegLocs\":[\n\n],\"featherSegLocs\":[\n\n],\"featherTensions\":[\n\n],\"featherTypes\":[\n\n],\"inTangents\":[[0,0],[21.7814788818359,-76.9777069091797],[0,0]],\"outTangents\":[[0,0],[-21.7814788818359,76.9776916503906],[0,0]],\"vertices\":[[300,150],[185.555313110352,285.567108154297],[212,461]]}"
+                            "value": "{\"closed\":false,\"featherInterps\":[\n\n],\"featherRadii\":[\n\n],\"featherRelCornerAngles\":[\n\n],\"featherRelSegLocs\":[\n\n],\"featherSegLocs\":[\n\n],\"featherTensions\":[\n\n],\"featherTypes\":[\n\n],\"inTangents\":[[0,0],[0,-80],[0,0]],\"outTangents\":[[0,0],[0,80],[0,0]],\"vertices\":[[300,150],[350.689697265625,300],[300,450]]}"
                           }
                         ],
                         "enabled": true
@@ -551,24 +551,24 @@
                                 "name": "Position",
                                 "type": "PROPERTY",
                                 "enabled": true,
-                                "expression": "content(\"Limb\").content(\"Inner\").content(\"Path\").path.pointOnPath(thisLayer.effect(\"Trim Sleeve\")(\"ADBE Slider Control-0001\")*.01)",
-                                "value": "[180.882736379771,350.114323353698]"
+                                "expression": "content(\"Limb\").content(\"Inner\").content(\"Path\").path.pointOnPath(thisComp.layer(\"{{ end }}\").effect(\"Limber\")(\"Lower Split\")*.01)",
+                                "value": "[341.066009882568,363.281335879107]"
                               },
                               {
                                 "matchName": "ADBE Vector Scale",
                                 "name": "Scale",
                                 "type": "PROPERTY",
                                 "enabled": true,
-                                "expression": "var endctrl  = thisComp.layer(\"{{ end }}\");\nvar c2 = endctrl.content(\"Admin\").content(\"p2blend\").transform.scale[0];\n[thisComp.layer(\"{{ end }}\").effect(\"Limber\")(\"Lower Rounding\") > 0 ? c2 : 0, thisComp.layer(\"{{ end }}\").effect(\"Limber\")(\"Lower Rounding\")/100*c2]",
-                                "value": "[117,64.10828392818]"
+                                "expression": "var endctrl  = thisComp.layer(\"{{ end }}\");\nvar c2 = endctrl.content(\"Admin\").content(\"p1\").transform.scale[0];\n[thisComp.layer(\"{{ end }}\").effect(\"Limber\")(\"Lower Rounding\") > 0 ? c2 : 0, thisComp.layer(\"{{ end }}\").effect(\"Limber\")(\"Lower Rounding\")/100*c2]",
+                                "value": "[100,76.4583332808742]"
                               },
                               {
                                 "matchName": "ADBE Vector Rotation",
                                 "name": "Rotation",
                                 "type": "PROPERTY",
                                 "enabled": true,
-                                "expression": "var myPath = thisComp.layer(\"{{ limb }}\").content(\"Limb\").content(\"Inner\").content(\"Path\").path;\nvar tangent = myPath.normalOnPath(thisLayer.effect(\"Trim Sleeve\")(\"ADBE Slider Control-0001\")*.01);\nradiansToDegrees(Math.atan2((tangent)[1],(tangent)[0]))",
-                                "value": "174.734553957454"
+                                "expression": "var myPath = thisComp.layer(\"{{ limb }}\").content(\"Limb\").content(\"Inner\").content(\"Path\").path;\nvar tangent = myPath.normalOnPath(thisComp.layer(\"{{ end }}\").effect(\"Limber\")(\"Lower Split\")*.01);\nradiansToDegrees(Math.atan2((tangent)[1],(tangent)[0]))",
+                                "value": "-163.710957639895"
                               }
                             ],
                             "enabled": true
@@ -697,39 +697,7 @@
     "matchName": "ADBE Effect Parade",
     "type": "INDEXED_GROUP",
     "properties": [
-      {
-        "matchName": "ADBE Slider Control",
-        "name": "Trim Sleeve",
-        "type": "NAMED_GROUP",
-        "properties": [
-          {
-            "matchName": "ADBE Slider Control-0001",
-            "name": "Slider",
-            "type": "PROPERTY",
-            "enabled": true,
-            "expression": "",
-            "value": "68"
-          },
-          {
-            "matchName": "ADBE Effect Built In Params",
-            "name": "Compositing Options",
-            "type": "NAMED_GROUP",
-            "properties": [
-              {
-                "matchName": "ADBE Effect Mask Parade",
-                "name": "Masks",
-                "type": "INDEXED_GROUP",
-                "properties": [
-                  
-                ],
-                "enabled": true
-              }
-            ],
-            "enabled": true
-          }
-        ],
-        "enabled": true
-      }
+      
     ]
   },
   "transform": {
