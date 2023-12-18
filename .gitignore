@@ -5,6 +5,8 @@ dist/
 
 node_modules/
 
+sources/
+
 # Caches
 sized/
 thumbs/
