@@ -5,6 +5,7 @@ dist/
 
 node_modules/
 
+sources
 sources/
 
 # Caches
