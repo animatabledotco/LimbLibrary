@@ -1,5 +1,5 @@
 {
-    "welcome": "The Limb Library is a collection of dynamic Shape Layer limbs that do things that would be impossible with default limbs or art rigging. Limbs are listed alphabetically in the right column. Check one or more tags in the left column to filter them.\r\rMarch 2025: Lots of fixes and new limbs. ‘Auto-scale’ properties renamed to ‘Constant Width’. Removed ‘Sleeve’ tag (use ‘Split’ instead). ‘Perspective’ tag renamed to ‘Rounding’. ‘Demo’ tag renamed to ‘Advanced’.",
+    "welcome": "The Limb Library is a collection of dynamic Shape Layer limbs that do things that would be impossible with default limbs or art rigging. Limbs are listed alphabetically in the right column. Check one or more tags in the left column to filter them.\r\rFebruary 2025: Lots of fixes and new limbs. ‘Auto-scale’ properties renamed to ‘Constant Width’. Removed ‘Sleeve’ tag (use ‘Split’ instead). ‘Perspective’ tag renamed to ‘Rounding’. ‘Demo’ tag renamed to ‘Advanced’.",
     "limbs": [
         {
             "id": 2048844942,
